@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clarity360 — Executive Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1f35;
+    --navy-mid: #152b47;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f7f4ef;
+    --text: #1a1a2e;
+    --muted: #6b7a8d;
+    --rule: #d6cfc3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 9.5pt;
+    line-height: 1.6;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    background: var(--cream);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    padding: 36px 52px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .header-left .eyebrow {
+    font-weight: 500;
+    font-size: 7.5pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30pt;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .header-left h1 span { color: var(--gold); }
+
+  .header-left .tagline {
+    margin-top: 10px;
+    color: #a8b8cc;
+    font-size: 10pt;
+    font-weight: 300;
+  }
+
+  .header-right { text-align: right; }
+
+  .header-right .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 13pt;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .header-right .brand-sub {
+    font-size: 7pt;
+    color: var(--gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .gold-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, transparent 100%);
+  }
+
+  /* BODY */
+  .body {
+    padding: 36px 52px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0 36px;
+  }
+
+  .divider-v { background: var(--rule); width: 1px; }
+
+  .section-label {
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* CHALLENGE */
+  .problem-block { margin-bottom: 22px; }
+  .problem-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .problem-block p { color: #3a4a5c; margin-bottom: 8px; font-size: 9pt; }
+
+  .tension-stat {
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    background: rgba(201,168,76,0.07);
+    margin: 12px 0;
+    font-style: italic;
+    font-size: 9.5pt;
+    color: var(--navy-mid);
+    line-height: 1.5;
+  }
+
+  .why-now {
+    font-size: 9pt;
+    color: var(--navy);
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 10px;
+    padding: 6px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* CAPABILITIES */
+  .capabilities { margin-bottom: 22px; }
+  .cap-item { display: flex; gap: 12px; margin-bottom: 11px; align-items: flex-start; }
+  .cap-icon {
+    width: 22px; height: 22px;
+    background: var(--navy);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .cap-icon svg { width: 10px; height: 10px; fill: var(--gold); }
+  .cap-text strong { display: block; font-weight: 500; font-size: 9pt; color: var(--navy); margin-bottom: 2px; }
+  .cap-text span { font-size: 8.5pt; color: var(--muted); line-height: 1.5; }
+
+  /* IMPACT CARDS */
+  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+  .impact-card { background: var(--navy); padding: 14px 16px; border-radius: 3px; }
+  .impact-card .impact-label {
+    font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px; font-weight: 500;
+  }
+  .impact-card .impact-body { font-size: 8.5pt; color: #c8d6e5; line-height: 1.5; font-weight: 300; }
+
+  /* HOW IT WORKS */
+  .how-block { margin-bottom: 22px; }
+  .how-step { display: flex; gap: 12px; margin-bottom: 9px; align-items: flex-start; }
+  .step-num {
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7pt; font-weight: 500; color: var(--gold);
+    margin-top: 1px;
+  }
+  .step-text { font-size: 8.5pt; color: #3a4a5c; line-height: 1.55; padding-top: 2px; }
+  .step-text strong { color: var(--navy); font-weight: 500; }
+
+  /* SIGNALS */
+  .signals-block { margin-bottom: 0; }
+  .signals-intro { font-size: 8.5pt; color: #3a4a5c; margin-bottom: 8px; font-style: italic; }
+  .signal-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill {
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 4px 11px;
+    font-size: 7.5pt;
+    color: var(--navy-mid);
+    background: white;
+    font-weight: 400;
+  }
+  .pill.highlight {
+    background: var(--navy);
+    color: var(--gold);
+    border-color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* CALLOUT / QUOTE */
+  .highlight-row {
+    grid-column: 1 / -1;
+    background: var(--navy);
+    padding: 14px 20px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .highlight-row .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 40pt;
+    color: var(--gold);
+    line-height: 0.7;
+    flex-shrink: 0;
+  }
+  .highlight-row .quote-text {
+    font-size: 10pt;
+    color: #e8f0f8;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .highlight-row .quote-text strong { color: var(--gold-light); font-style: normal; font-weight: 500; }
+
+  /* ORGANIC GROWTH STATEMENT */
+  .growth-statement {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 9.5pt;
+    font-weight: 500;
+    color: var(--navy);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 20px;
+    margin-bottom: 26px;
+    letter-spacing: 0.01em;
+  }
+  .growth-statement span { color: var(--gold); }
+
+  /* EXAMPLE SCENARIO — full-width below body columns */
+  .example-section {
+    grid-column: 1 / -1;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    background: #fff;
+    padding: 16px 20px;
+    margin-top: 4px;
+  }
+  .example-section .ex-label {
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .example-section .ex-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .example-section .ex-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .ex-flow {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr;
+    align-items: center;
+    gap: 0;
+  }
+  .ex-step {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  .ex-step .ex-step-label {
+    font-size: 6pt;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .ex-step p { font-size: 8pt; color: #3a4a5c; line-height: 1.5; }
+  .ex-arrow {
+    text-align: center;
+    color: var(--gold);
+    font-size: 14pt;
+    font-weight: 300;
+  }
+  .ex-result {
+    background: var(--navy);
+    border-radius: 3px;
+    padding: 10px 12px;
+  }
+  .ex-result .ex-step-label { font-size: 6pt; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .ex-result p { font-size: 8pt; color: #c8d6e5; line-height: 1.5; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--navy);
+    padding: 18px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left { font-size: 8pt; color: #a8b8cc; font-weight: 300; }
+  .footer-left strong { color: white; font-weight: 500; }
+  .footer-cta { text-align: right; }
+  .footer-cta .cta-label { font-size: 6.5pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+  .footer-cta .contact { font-size: 8.5pt; color: white; font-weight: 500; }
+  .footer-cta .email { font-size: 8pt; color: var(--gold-light); font-weight: 300; margin-top: 2px; }
+
+  @media print {
+    body { background: white; }
+    .page { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Executive Brief &nbsp;·&nbsp; Commercial &amp; Retail Banking</div>
+      <h1>Clarity<span>360</span></h1>
+      <div class="tagline">Turning your bank's existing data into growth and clear action</div>
+    </div>
+    <div class="header-right">
+      <div class="brand">Loyto.ai</div>
+      <div class="brand-sub">Decision Intelligence</div>
+    </div>
+  </div>
+  <div class="gold-rule"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- QUOTE CALLOUT -->
+    <div style="grid-column: 1 / -1; margin-bottom: 10px;">
+      <div class="highlight-row">
+        <div class="quote-mark">"</div>
+        <div class="quote-text">
+          Most banks are not limited by capital or products —
+          they are limited by <strong>visibility and execution.</strong>
+          Growth is already inside your portfolio. Clarity360 finds it.
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANIC GROWTH STATEMENT -->
+    <div class="growth-statement">
+      Clarity360 is designed to drive organic growth from your existing customer base —
+      <span>not just analyze it.</span>
+    </div>
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <div class="problem-block">
+        <div class="section-label">The Challenge</div>
+        <h2>Revenue is being left on the table — every quarter.</h2>
+        <p>Relationship managers are stretched, data is fragmented, and cross-sell efforts remain reactive. High-value opportunities exist inside every portfolio — but they stay hidden.</p>
+        <div class="tension-stat">
+          Banks with strong organic growth capability generate up to <strong>40% more revenue per relationship</strong> than peers relying on new customer acquisition alone.
+        </div>
+        <p>Margin compression, fintech competition, and the pressure to grow deposits and loans organically make this a strategic priority — not a nice-to-have.</p>
+        <div class="why-now">
+          Banks that win today are not those with more data — but those that act on it faster and more consistently.
+        </div>
+      </div>
+
+      <div class="capabilities">
+        <div class="section-label">What Clarity360 Does</div>
+
+        <div class="cap-item">
+          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
+          <div class="cap-text">
+            <strong>Surfaces growth opportunities automatically</strong>
+            <span>Identifies and prioritizes treasury, credit, deposit, and merchant opportunities based on revenue potential and timing — surfaced before your competitors act.</span>
+          </div>
+        </div>
+
+        <div class="cap-item">
+          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
+          <div class="cap-text">
+            <strong>Detects risk signals early</strong>
+            <span>Flags liquidity stress, deposit instability, and credit deterioration so RMs can intervene before relationships are lost.</span>
+          </div>
+        </div>
+
+        <div class="cap-item">
+          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
+          <div class="cap-text">
+            <strong>Equips bankers to act with confidence</strong>
+            <span>Every signal includes context, talking points, and a recommended next step — so RMs spend time closing, not searching.</span>
+          </div>
+        </div>
+
+        <div class="cap-item">
+          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
+          <div class="cap-text">
+            <strong>Drives consistency across portfolios</strong>
+            <span>Leadership gains visibility into opportunity pipelines, risk concentrations, and team execution — across every region and segment.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- VERTICAL DIVIDER -->
+    <div class="divider-v"></div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+
+      <div style="margin-bottom: 22px;">
+        <div class="section-label">Business Impact</div>
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-label">Revenue Growth</div>
+            <div class="impact-body">Higher cross-sell conversion through prioritized, data-driven outreach — focused on the right clients at the right time.</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-label">Retention</div>
+            <div class="impact-body">Early detection of at-risk relationships protects long-term customer value and prevents avoidable attrition.</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-label">RM Productivity</div>
+            <div class="impact-body">Bankers know exactly who to call, why, and what to say — reducing preparation time and increasing confidence in every interaction.</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-label">Portfolio Visibility</div>
+            <div class="impact-body">Leadership sees pipeline health, risk concentration, and opportunity distribution across all segments and regions.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-block">
+        <div class="section-label">How It Works</div>
+        <div class="how-step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Connects to your existing data</strong> — transaction files, account exports, and CSV extracts. No core system integration required.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Analyzes behavioral and financial patterns</strong> across accounts, loans, treasury, and merchant activity — at the relationship level.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Generates ranked signals and opportunities</strong> with estimated revenue, urgency scores, and confidence ratings.</div>
+        </div>
+        <div class="how-step">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Delivers prioritized daily tasks</strong> directly to your RMs — with context, talking points, and a clear recommended next step.</div>
+        </div>
+      </div>
+
+      <div class="signals-block">
+        <div class="section-label">Example Signals</div>
+        <p class="signals-intro">Clarity360 continuously generates signals such as:</p>
+        <div class="signal-pills">
+          <div class="pill highlight">Treasury opportunity detected</div>
+          <div class="pill highlight">Credit expansion signal</div>
+          <div class="pill">Strong cash flow, no treasury services</div>
+          <div class="pill">LOC utilization trending up</div>
+          <div class="pill">Merchant volume growth</div>
+          <div class="pill">Deposit balance decline</div>
+          <div class="pill">At-risk relationship flagged</div>
+          <div class="pill">Cross-sell readiness: deposits</div>
+          <div class="pill">New product gap identified</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- EXAMPLE SCENARIO — full width -->
+    <div class="example-section">
+      <div class="ex-label">From Insight to Revenue — A Real Example</div>
+      <div class="ex-title">Turning a Signal into a New Treasury Relationship</div>
+      <div class="ex-flow">
+        <div class="ex-step">
+          <div class="ex-step-label">Signal Detected</div>
+          <p>A commercial client shows rising deposits and increasing transaction volume — but no treasury services enrolled.</p>
+        </div>
+        <div class="ex-arrow">›</div>
+        <div class="ex-step">
+          <div class="ex-step-label">Opportunity Flagged</div>
+          <p>Clarity360 flags a high-confidence treasury opportunity with estimated annual revenue and urgency score.</p>
+        </div>
+        <div class="ex-arrow">›</div>
+        <div class="ex-step">
+          <div class="ex-step-label">RM Equipped</div>
+          <p>The RM receives a prioritized task with talking points and a recommended next step — ready to engage.</p>
+        </div>
+        <div class="ex-arrow">›</div>
+        <div class="ex-result">
+          <div class="ex-step-label">Outcome</div>
+          <p>New treasury relationship established within days. Wallet share increased. No data mining required.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <strong>Loyto.ai</strong> &nbsp;·&nbsp; Clarity360 Decision Intelligence Platform<br>
+      Deployed alongside existing systems · No disruption to core operations · Rapid time-to-value
+    </div>
+    <div class="footer-cta">
+      <div class="cta-label">Request a conversation</div>
+      <div class="contact">Sowmya Sridhar</div>
+      <div class="email">sowmyas@loyto.ai</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
