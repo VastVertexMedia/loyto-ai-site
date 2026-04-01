@@ -16,335 +16,234 @@
     --muted: #6b7a8d;
     --rule: #d6cfc3;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background: var(--cream);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    font-size: 9.5pt;
-    line-height: 1.6;
+    background:var(--cream); color:var(--text);
+    font-family:'DM Sans',sans-serif; font-weight:300;
+    font-size:9.5pt; line-height:1.6;
   }
-
   .page {
-    width: 8.5in;
-    min-height: 11in;
-    margin: 0 auto;
-    background: var(--cream);
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    width:8.5in; min-height:11in; margin:0 auto;
+    background:var(--cream);
+    display:grid; grid-template-rows:auto 1fr auto;
   }
 
-  /* HEADER */
+  /* ── HEADER ── */
   .header {
-    background: var(--navy);
-    padding: 36px 52px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    background:var(--navy); padding:36px 52px 32px;
+    display:flex; justify-content:space-between; align-items:flex-end;
   }
-
   .header-left .eyebrow {
-    font-weight: 500;
-    font-size: 7.5pt;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
+    font-weight:500; font-size:7.5pt;
+    letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:8px;
   }
-
   .header-left h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 30pt;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.01em;
-    line-height: 1.1;
+    font-family:'Playfair Display',serif;
+    font-size:30pt; font-weight:700; color:#fff;
+    letter-spacing:-0.01em; line-height:1.1;
   }
-
-  .header-left h1 span { color: var(--gold); }
-
-  .header-left .tagline {
-    margin-top: 10px;
-    color: #a8b8cc;
-    font-size: 10pt;
-    font-weight: 300;
-  }
-
-  .header-right { text-align: right; }
-
+  .header-left h1 span { color:var(--gold); }
+  .header-left .tagline { margin-top:10px; color:#a8b8cc; font-size:10pt; font-weight:300; }
+  .header-right { text-align:right; }
   .header-right .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 13pt;
-    color: #fff;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-family:'Playfair Display',serif;
+    font-size:13pt; color:#fff; font-weight:600; letter-spacing:0.04em;
   }
-
   .header-right .brand-sub {
-    font-size: 7pt;
-    color: var(--gold);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-top: 3px;
+    font-size:7pt; color:var(--gold);
+    letter-spacing:0.14em; text-transform:uppercase; margin-top:3px;
   }
-
   .gold-rule {
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, transparent 100%);
+    height:3px;
+    background:linear-gradient(90deg,var(--gold) 0%,var(--gold-light) 50%,transparent 100%);
   }
 
-  /* BODY */
+  /* ── BODY ── */
   .body {
-    padding: 36px 52px 28px;
-    display: grid;
-    grid-template-columns: 1fr 1px 1fr;
-    gap: 0 36px;
+    padding:36px 52px 28px;
+    display:grid; grid-template-columns:1fr 1px 1fr; gap:0 36px;
   }
+  .divider-v { background:var(--rule); width:1px; }
 
-  .divider-v { background: var(--rule); width: 1px; }
-
+  /* ── SECTION LABELS ── */
   .section-label {
-    font-size: 6.5pt;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size:6.5pt; font-weight:500; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--rule); }
 
-  /* CHALLENGE */
-  .problem-block { margin-bottom: 22px; }
+  /* ── CHALLENGE ── */
+  .problem-block { margin-bottom:22px; }
   .problem-block h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 13pt;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 10px;
-    line-height: 1.3;
+    font-family:'Playfair Display',serif;
+    font-size:13pt; font-weight:600; color:var(--navy);
+    margin-bottom:10px; line-height:1.3;
   }
-  .problem-block p { color: #3a4a5c; margin-bottom: 8px; font-size: 9pt; }
-
+  .problem-block p { color:#3a4a5c; margin-bottom:8px; font-size:9pt; }
   .tension-stat {
-    border-left: 3px solid var(--gold);
-    padding: 10px 14px;
-    background: rgba(201,168,76,0.07);
-    margin: 12px 0;
-    font-style: italic;
-    font-size: 9.5pt;
-    color: var(--navy-mid);
-    line-height: 1.5;
+    border-left:3px solid var(--gold); padding:10px 14px;
+    background:rgba(201,168,76,0.07); margin:12px 0;
+    font-style:italic; font-size:9.5pt; color:var(--navy-mid); line-height:1.5;
   }
-
+  .speed-line {
+    display:flex; align-items:center; gap:10px;
+    margin:10px 0; font-size:9pt; color:var(--navy); font-weight:500;
+  }
+  .speed-line .speed-dot {
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
+  }
   .why-now {
-    font-size: 9pt;
-    color: var(--navy);
-    font-weight: 500;
-    font-style: italic;
-    margin-top: 10px;
-    padding: 6px 0;
-    border-top: 1px solid var(--rule);
+    font-size:9pt; color:var(--navy); font-weight:500; font-style:italic;
+    margin-top:10px; padding:6px 0; border-top:1px solid var(--rule);
   }
 
-  /* CAPABILITIES */
-  .capabilities { margin-bottom: 22px; }
-  .cap-item { display: flex; gap: 12px; margin-bottom: 11px; align-items: flex-start; }
+  /* ── CAPABILITIES ── */
+  .capabilities { margin-bottom:22px; }
+  .cap-item { display:flex; gap:12px; margin-bottom:11px; align-items:flex-start; }
   .cap-icon {
-    width: 22px; height: 22px;
-    background: var(--navy);
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 1px;
+    width:22px; height:22px; background:var(--navy); border-radius:50%;
+    flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;
   }
-  .cap-icon svg { width: 10px; height: 10px; fill: var(--gold); }
-  .cap-text strong { display: block; font-weight: 500; font-size: 9pt; color: var(--navy); margin-bottom: 2px; }
-  .cap-text span { font-size: 8.5pt; color: var(--muted); line-height: 1.5; }
+  .cap-icon svg { width:10px; height:10px; fill:var(--gold); }
+  .cap-text strong { display:block; font-weight:500; font-size:9pt; color:var(--navy); margin-bottom:2px; }
+  .cap-text span { font-size:8.5pt; color:var(--muted); line-height:1.5; }
 
-  /* IMPACT CARDS */
-  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
-  .impact-card { background: var(--navy); padding: 14px 16px; border-radius: 3px; }
+  /* ── IMPACT CARDS ── */
+  .impact-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+  .impact-card { background:var(--navy); padding:14px 16px; border-radius:3px; }
   .impact-card .impact-label {
-    font-size: 7pt; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 6px; font-weight: 500;
+    font-size:7pt; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px; font-weight:500;
   }
-  .impact-card .impact-body { font-size: 8.5pt; color: #c8d6e5; line-height: 1.5; font-weight: 300; }
+  .impact-card .impact-body { font-size:8.5pt; color:#c8d6e5; line-height:1.5; font-weight:300; }
+  .no-integration-note {
+    font-size:8pt; color:var(--muted); text-align:center;
+    padding:7px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    margin-bottom:22px;
+  }
+  .no-integration-note strong { color:var(--navy); font-weight:500; }
 
-  /* HOW IT WORKS */
-  .how-block { margin-bottom: 22px; }
-  .how-step { display: flex; gap: 12px; margin-bottom: 9px; align-items: flex-start; }
+  /* ── SERVES GRID ── */
+  .serves-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:22px; }
+  .serves-card {
+    border:1px solid var(--rule); border-top:2px solid var(--gold);
+    padding:10px 12px; background:white; border-radius:2px;
+  }
+  .serves-card .serves-role {
+    font-size:7.5pt; font-weight:500; color:var(--navy);
+    letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;
+  }
+  .serves-card p { font-size:8pt; color:#3a4a5c; line-height:1.5; }
+
+  /* ── HOW IT WORKS ── */
+  .how-block { margin-bottom:22px; }
+  .how-step { display:flex; gap:12px; margin-bottom:9px; align-items:flex-start; }
   .step-num {
-    width: 20px; height: 20px;
-    border: 1.5px solid var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 7pt; font-weight: 500; color: var(--gold);
-    margin-top: 1px;
+    width:20px; height:20px; border:1.5px solid var(--gold);
+    border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:7pt; font-weight:500; color:var(--gold); margin-top:1px;
   }
-  .step-text { font-size: 8.5pt; color: #3a4a5c; line-height: 1.55; padding-top: 2px; }
-  .step-text strong { color: var(--navy); font-weight: 500; }
+  .step-text { font-size:8.5pt; color:#3a4a5c; line-height:1.55; padding-top:2px; }
+  .step-text strong { color:var(--navy); font-weight:500; }
 
-  /* SIGNALS */
-  .signals-block { margin-bottom: 0; }
-  .signals-intro { font-size: 8.5pt; color: #3a4a5c; margin-bottom: 8px; font-style: italic; }
-  .signal-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  /* ── GROUPED SIGNALS ── */
+  .signals-block { margin-bottom:0; }
+  .signals-intro { font-size:8.5pt; color:#3a4a5c; margin-bottom:10px; font-style:italic; }
+  .signals-columns { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .signal-group-label {
+    font-size:6.5pt; font-weight:500; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:7px;
+    padding-bottom:4px; border-bottom:1px solid var(--rule);
+  }
+  .signal-list { display:flex; flex-direction:column; gap:5px; }
   .pill {
-    border: 1px solid var(--rule);
-    border-radius: 20px;
-    padding: 4px 11px;
-    font-size: 7.5pt;
-    color: var(--navy-mid);
-    background: white;
-    font-weight: 400;
+    display:inline-block; border:1px solid var(--rule); border-radius:20px;
+    padding:4px 11px; font-size:7.5pt; color:var(--navy-mid);
+    background:white; font-weight:400;
   }
   .pill.highlight {
-    background: var(--navy);
-    color: var(--gold);
-    border-color: var(--navy);
-    font-weight: 500;
+    background:var(--navy); color:var(--gold);
+    border-color:var(--navy); font-weight:500;
   }
 
-  /* CALLOUT / QUOTE */
+  /* ── CALLOUT ── */
   .highlight-row {
-    grid-column: 1 / -1;
-    background: var(--navy);
-    padding: 14px 20px;
-    border-radius: 3px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    grid-column:1/-1; background:var(--navy);
+    padding:14px 20px; border-radius:3px;
+    margin-bottom:8px; display:flex; align-items:center; gap:16px;
   }
   .highlight-row .quote-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 40pt;
-    color: var(--gold);
-    line-height: 0.7;
-    flex-shrink: 0;
+    font-family:'Playfair Display',serif;
+    font-size:40pt; color:var(--gold); line-height:0.7; flex-shrink:0;
   }
   .highlight-row .quote-text {
-    font-size: 10pt;
-    color: #e8f0f8;
-    font-style: italic;
-    line-height: 1.5;
-    font-weight: 300;
+    font-size:10pt; color:#e8f0f8; font-style:italic; line-height:1.5; font-weight:300;
   }
-  .highlight-row .quote-text strong { color: var(--gold-light); font-style: normal; font-weight: 500; }
+  .highlight-row .quote-text strong { color:var(--gold-light); font-style:normal; font-weight:500; }
 
-  /* ORGANIC GROWTH STATEMENT */
+  /* ── GROWTH STATEMENT ── */
   .growth-statement {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 9.5pt;
-    font-weight: 500;
-    color: var(--navy);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 10px 20px;
-    margin-bottom: 26px;
-    letter-spacing: 0.01em;
+    grid-column:1/-1; text-align:center;
+    font-size:9.5pt; font-weight:500; color:var(--navy);
+    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    padding:10px 20px; margin-bottom:26px; letter-spacing:0.01em;
   }
-  .growth-statement span { color: var(--gold); }
+  .growth-statement span { color:var(--gold); }
 
-  /* EXAMPLE SCENARIO — full-width below body columns */
+  /* ── EXAMPLE ── */
   .example-section {
-    grid-column: 1 / -1;
-    border: 1px solid var(--rule);
-    border-left: 3px solid var(--gold);
-    background: #fff;
-    padding: 16px 20px;
-    margin-top: 4px;
+    grid-column:1/-1; border:1px solid var(--rule); border-left:3px solid var(--gold);
+    background:#fff; padding:16px 20px; margin-top:4px;
   }
   .example-section .ex-label {
-    font-size: 6.5pt;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size:6.5pt; font-weight:500; letter-spacing:0.2em;
+    text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
   }
-  .example-section .ex-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--rule);
-  }
+  .example-section .ex-label::after { content:''; flex:1; height:1px; background:var(--rule); }
   .example-section .ex-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 10.5pt;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 10px;
+    font-family:'Playfair Display',serif;
+    font-size:10.5pt; font-weight:600; color:var(--navy); margin-bottom:10px;
   }
-  .ex-flow {
-    display: grid;
-    grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr;
-    align-items: center;
-    gap: 0;
-  }
-  .ex-step {
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 10px 12px;
-  }
-  .ex-step .ex-step-label {
-    font-size: 6pt;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 4px;
-  }
-  .ex-step p { font-size: 8pt; color: #3a4a5c; line-height: 1.5; }
-  .ex-arrow {
-    text-align: center;
-    color: var(--gold);
-    font-size: 14pt;
-    font-weight: 300;
-  }
-  .ex-result {
-    background: var(--navy);
-    border-radius: 3px;
-    padding: 10px 12px;
-  }
-  .ex-result .ex-step-label { font-size: 6pt; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-  .ex-result p { font-size: 8pt; color: #c8d6e5; line-height: 1.5; }
+  .ex-flow { display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr; align-items:center; }
+  .ex-step { background:var(--cream); border:1px solid var(--rule); border-radius:3px; padding:10px 12px; }
+  .ex-step .ex-step-label { font-size:6pt; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .ex-step p { font-size:8pt; color:#3a4a5c; line-height:1.5; }
+  .ex-arrow { text-align:center; color:var(--gold); font-size:14pt; font-weight:300; }
+  .ex-result { background:var(--navy); border-radius:3px; padding:10px 12px; }
+  .ex-result .ex-step-label { font-size:6pt; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
+  .ex-result p { font-size:8pt; color:#c8d6e5; line-height:1.5; }
 
-  /* FOOTER */
+  /* ── CLOSING STATEMENT ── */
+  .closing-statement {
+    background:var(--navy); padding:20px 52px;
+    text-align:center;
+  }
+  .closing-statement p {
+    font-family:'Playfair Display',serif;
+    font-size:11.5pt; font-weight:400; color:#e8f0f8;
+    line-height:1.6; font-style:italic;
+  }
+  .closing-statement p strong { color:var(--gold-light); font-style:normal; font-weight:600; }
+
+  /* ── FOOTER ── */
   .footer {
-    background: var(--navy);
-    padding: 18px 52px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background:var(--navy); padding:14px 52px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid #1e3450;
   }
-  .footer-left { font-size: 8pt; color: #a8b8cc; font-weight: 300; }
-  .footer-left strong { color: white; font-weight: 500; }
-  .footer-cta { text-align: right; }
-  .footer-cta .cta-label { font-size: 6.5pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
-  .footer-cta .contact { font-size: 8.5pt; color: white; font-weight: 500; }
-  .footer-cta .email { font-size: 8pt; color: var(--gold-light); font-weight: 300; margin-top: 2px; }
+  .footer-left { font-size:8pt; color:#a8b8cc; font-weight:300; }
+  .footer-left strong { color:white; font-weight:500; }
+  .footer-cta { text-align:right; }
+  .footer-cta .cta-label { font-size:6.5pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:3px; }
+  .footer-cta .contact { font-size:8.5pt; color:white; font-weight:500; }
+  .footer-cta .email { font-size:8pt; color:var(--gold-light); font-weight:300; margin-top:2px; }
 
-  @media print {
-    body { background: white; }
-    .page { width: 100%; }
-  }
+  @media print { body { background:white; } .page { width:100%; } }
 </style>
 </head>
 <body>
@@ -355,7 +254,7 @@
     <div class="header-left">
       <div class="eyebrow">Executive Brief &nbsp;·&nbsp; Commercial &amp; Retail Banking</div>
       <h1>Clarity<span>360</span></h1>
-      <div class="tagline">Turning your bank's existing data into growth and clear action</div>
+      <div class="tagline">Decision intelligence for the whole institution — not just one team</div>
     </div>
     <div class="header-right">
       <div class="brand">Loyto.ai</div>
@@ -367,22 +266,22 @@
   <!-- BODY -->
   <div class="body">
 
-    <!-- QUOTE CALLOUT -->
-    <div style="grid-column: 1 / -1; margin-bottom: 10px;">
+    <!-- CALLOUT -->
+    <div style="grid-column:1/-1; margin-bottom:10px;">
       <div class="highlight-row">
         <div class="quote-mark">"</div>
         <div class="quote-text">
-          Most banks are not limited by capital or products —
-          they are limited by <strong>visibility and execution.</strong>
-          Growth is already inside your portfolio. Clarity360 finds it.
+          Growth opportunities and risk signals exist in every bank's data today.
+          The institutions that win are those that surface them
+          <strong>across every function — consistently, at speed, and at scale.</strong>
         </div>
       </div>
     </div>
 
-    <!-- ORGANIC GROWTH STATEMENT -->
+    <!-- GROWTH STATEMENT -->
     <div class="growth-statement">
       Clarity360 is designed to drive organic growth from your existing customer base —
-      <span>not just analyze it.</span>
+      <span>as a shared intelligence layer across your entire organization.</span>
     </div>
 
     <!-- LEFT COLUMN -->
@@ -390,14 +289,19 @@
 
       <div class="problem-block">
         <div class="section-label">The Challenge</div>
-        <h2>Revenue is being left on the table — every quarter.</h2>
-        <p>Relationship managers are stretched, data is fragmented, and cross-sell efforts remain reactive. High-value opportunities exist inside every portfolio — but they stay hidden.</p>
+        <h2>The data exists. The ability to act on it — consistently and at scale — does not.</h2>
+        <p>Growth signals and risk indicators are buried in your core systems. They reach the right people too slowly, too inconsistently, and never in a form that drives immediate action.</p>
         <div class="tension-stat">
           Banks with strong organic growth capability generate up to <strong>40% more revenue per relationship</strong> than peers relying on new customer acquisition alone.
         </div>
-        <p>Margin compression, fintech competition, and the pressure to grow deposits and loans organically make this a strategic priority — not a nice-to-have.</p>
+        <p>The gap isn't data. It's institutional intelligence — the ability to convert what you already know into consistent, timely action across every team.</p>
+        <!-- SPEED LINE -->
+        <div class="speed-line">
+          <div class="speed-dot"></div>
+          Signals and opportunities are delivered in near real time — not weeks later in a report.
+        </div>
         <div class="why-now">
-          Banks that win today are not those with more data — but those that act on it faster and more consistently.
+          Banks that win today are not those with more data — but those that act on it faster and more consistently across every function.
         </div>
       </div>
 
@@ -407,32 +311,32 @@
         <div class="cap-item">
           <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
           <div class="cap-text">
-            <strong>Surfaces growth opportunities automatically</strong>
-            <span>Identifies and prioritizes treasury, credit, deposit, and merchant opportunities based on revenue potential and timing — surfaced before your competitors act.</span>
+            <strong>Surfaces growth opportunities institution-wide</strong>
+            <span>Identifies and prioritizes treasury, credit, deposit, and merchant opportunities based on revenue potential and timing — across every portfolio, region, and segment.</span>
           </div>
         </div>
 
         <div class="cap-item">
           <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
           <div class="cap-text">
-            <strong>Detects risk signals early</strong>
-            <span>Flags liquidity stress, deposit instability, and credit deterioration so RMs can intervene before relationships are lost.</span>
+            <strong>Detects risk signals before they escalate</strong>
+            <span>Flags liquidity stress, deposit instability, and credit deterioration early — so the right team can intervene before relationships or assets are at risk.</span>
           </div>
         </div>
 
         <div class="cap-item">
           <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
           <div class="cap-text">
-            <strong>Equips bankers to act with confidence</strong>
-            <span>Every signal includes context, talking points, and a recommended next step — so RMs spend time closing, not searching.</span>
+            <strong>Delivers ranked, actionable intelligence to every role</strong>
+            <span>From RM to executive leadership — every signal is explained, prioritized, and paired with a recommended next step.</span>
           </div>
         </div>
 
         <div class="cap-item">
           <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
           <div class="cap-text">
-            <strong>Drives consistency across portfolios</strong>
-            <span>Leadership gains visibility into opportunity pipelines, risk concentrations, and team execution — across every region and segment.</span>
+            <strong>Creates consistency across the institution</strong>
+            <span>Every region, every portfolio, every team operates from the same intelligence — eliminating the performance gap between your best people and the rest.</span>
           </div>
         </div>
 
@@ -446,28 +350,53 @@
     <!-- RIGHT COLUMN -->
     <div class="right-col">
 
-      <div style="margin-bottom: 22px;">
-        <div class="section-label">Business Impact</div>
-        <div class="impact-grid">
-          <div class="impact-card">
-            <div class="impact-label">Revenue Growth</div>
-            <div class="impact-body">Higher cross-sell conversion through prioritized, data-driven outreach — focused on the right clients at the right time.</div>
-          </div>
-          <div class="impact-card">
-            <div class="impact-label">Retention</div>
-            <div class="impact-body">Early detection of at-risk relationships protects long-term customer value and prevents avoidable attrition.</div>
-          </div>
-          <div class="impact-card">
-            <div class="impact-label">RM Productivity</div>
-            <div class="impact-body">Bankers know exactly who to call, why, and what to say — reducing preparation time and increasing confidence in every interaction.</div>
-          </div>
-          <div class="impact-card">
-            <div class="impact-label">Portfolio Visibility</div>
-            <div class="impact-body">Leadership sees pipeline health, risk concentration, and opportunity distribution across all segments and regions.</div>
-          </div>
+      <!-- IMPACT -->
+      <div class="section-label">Business Impact</div>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-label">Organic Revenue Growth</div>
+          <div class="impact-body">Prioritized opportunities across every portfolio — ranked by revenue potential, confidence, and urgency — so no relationship is overlooked.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-label">Relationship Retention</div>
+          <div class="impact-body">Institution-wide early warning signals protect your highest-value relationships before stress becomes attrition.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-label">Execution Consistency</div>
+          <div class="impact-body">Every team — RMs, credit, treasury, branch — acts from the same intelligence with the same clarity, across every region and segment.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-label">Leadership Visibility</div>
+          <div class="impact-body">A real-time view of portfolio health, opportunity pipeline, risk concentration, and team execution across the whole institution.</div>
+        </div>
+      </div>
+      <!-- NO INTEGRATION REPEAT -->
+      <div class="no-integration-note">
+        <strong>No changes to core systems.</strong> No disruption to existing operations. Deployed rapidly alongside what you already have.
+      </div>
+
+      <!-- WHO IT SERVES -->
+      <div class="section-label">Intelligence Across Every Function</div>
+      <div class="serves-grid" style="margin-bottom:22px;">
+        <div class="serves-card">
+          <div class="serves-role">Relationship Managers</div>
+          <p>Know exactly who to call, why, and what to say — with talking points prepared and next steps clear.</p>
+        </div>
+        <div class="serves-card">
+          <div class="serves-role">Credit &amp; Risk Teams</div>
+          <p>Early warning signals surface before deterioration escalates — enabling timely, data-driven decisions.</p>
+        </div>
+        <div class="serves-card">
+          <div class="serves-role">Treasury Officers</div>
+          <p>Cross-sell readiness and service gaps identified automatically — with revenue estimates attached.</p>
+        </div>
+        <div class="serves-card">
+          <div class="serves-role">Executive Leadership</div>
+          <p>Full visibility into growth pipeline, risk concentration, and execution consistency across all regions.</p>
         </div>
       </div>
 
+      <!-- HOW IT WORKS -->
       <div class="how-block">
         <div class="section-label">How It Works</div>
         <div class="how-step">
@@ -476,37 +405,49 @@
         </div>
         <div class="how-step">
           <div class="step-num">2</div>
-          <div class="step-text"><strong>Analyzes behavioral and financial patterns</strong> across accounts, loans, treasury, and merchant activity — at the relationship level.</div>
+          <div class="step-text"><strong>Analyzes behavioral and financial patterns</strong> across every account, loan, treasury service, and merchant relationship.</div>
         </div>
         <div class="how-step">
           <div class="step-num">3</div>
-          <div class="step-text"><strong>Generates ranked signals and opportunities</strong> with estimated revenue, urgency scores, and confidence ratings.</div>
+          <div class="step-text"><strong>Generates ranked signals and opportunities</strong> with estimated revenue, urgency scores, and confidence ratings — in near real time.</div>
         </div>
         <div class="how-step">
           <div class="step-num">4</div>
-          <div class="step-text"><strong>Delivers prioritized daily tasks</strong> directly to your RMs — with context, talking points, and a clear recommended next step.</div>
+          <div class="step-text"><strong>Delivers prioritized actions</strong> to the right team, at the right time — with context, talking points, and a clear recommended next step.</div>
         </div>
       </div>
 
+      <!-- GROUPED SIGNALS -->
       <div class="signals-block">
         <div class="section-label">Example Signals</div>
         <p class="signals-intro">Clarity360 continuously generates signals such as:</p>
-        <div class="signal-pills">
-          <div class="pill highlight">Treasury opportunity detected</div>
-          <div class="pill highlight">Credit expansion signal</div>
-          <div class="pill">Strong cash flow, no treasury services</div>
-          <div class="pill">LOC utilization trending up</div>
-          <div class="pill">Merchant volume growth</div>
-          <div class="pill">Deposit balance decline</div>
-          <div class="pill">At-risk relationship flagged</div>
-          <div class="pill">Cross-sell readiness: deposits</div>
-          <div class="pill">New product gap identified</div>
+        <div class="signals-columns">
+          <div>
+            <div class="signal-group-label">Growth Signals</div>
+            <div class="signal-list">
+              <span class="pill highlight">Treasury opportunity detected</span>
+              <span class="pill highlight">Credit expansion signal</span>
+              <span class="pill">Merchant volume growth</span>
+              <span class="pill">Cross-sell readiness: deposits</span>
+              <span class="pill">Strong cash flow, no treasury services</span>
+            </div>
+          </div>
+          <div>
+            <div class="signal-group-label">Risk Signals</div>
+            <div class="signal-list">
+              <span class="pill">Deposit balance decline</span>
+              <span class="pill">At-risk relationship flagged</span>
+              <span class="pill">LOC utilization trending up</span>
+              <span class="pill">Credit deterioration indicators</span>
+              <span class="pill">New product gap identified</span>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- EXAMPLE SCENARIO — full width -->
+    <!-- EXAMPLE SCENARIO -->
     <div class="example-section">
       <div class="ex-label">From Insight to Revenue — A Real Example</div>
       <div class="ex-title">Turning a Signal into a New Treasury Relationship</div>
@@ -518,12 +459,12 @@
         <div class="ex-arrow">›</div>
         <div class="ex-step">
           <div class="ex-step-label">Opportunity Flagged</div>
-          <p>Clarity360 flags a high-confidence treasury opportunity with estimated annual revenue and urgency score.</p>
+          <p>Clarity360 flags a high-confidence treasury opportunity with estimated annual revenue and urgency score — in near real time.</p>
         </div>
         <div class="ex-arrow">›</div>
         <div class="ex-step">
-          <div class="ex-step-label">RM Equipped</div>
-          <p>The RM receives a prioritized task with talking points and a recommended next step — ready to engage.</p>
+          <div class="ex-step-label">Teams Equipped</div>
+          <p>The RM and treasury officer each receive a prioritized task with talking points and a recommended next step.</p>
         </div>
         <div class="ex-arrow">›</div>
         <div class="ex-result">
@@ -534,6 +475,15 @@
     </div>
 
   </div><!-- /body -->
+
+  <!-- CLOSING STATEMENT -->
+  <div class="closing-statement">
+    <p>
+      Clarity360 turns your bank's existing data into
+      <strong>coordinated action across your entire institution</strong>
+      — driving growth, protecting relationships, and improving execution at scale.
+    </p>
+  </div>
 
   <!-- FOOTER -->
   <div class="footer">
