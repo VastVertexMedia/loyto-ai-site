@@ -3,501 +3,1123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clarity360 — Executive Brief</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Clarity360 — Community Financial Intelligence · Loyto.ai</title>
+<meta name="description" content="Clarity360 turns your institution's existing data into relationship intelligence — surfacing risk, growth, and retention signals automatically for community banks and credit unions.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1f35;
-    --navy-mid: #152b47;
-    --gold: #c9a84c;
-    --gold-light: #e2c47a;
-    --cream: #f7f4ef;
-    --text: #1a1a2e;
-    --muted: #6b7a8d;
-    --rule: #d6cfc3;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background:var(--cream); color:var(--text);
-    font-family:'DM Sans',sans-serif; font-weight:300;
-    font-size:9.5pt; line-height:1.6;
-  }
-  .page {
-    width:8.5in; min-height:11in; margin:0 auto;
-    background:var(--cream);
-    display:grid; grid-template-rows:auto 1fr auto;
-  }
 
-  /* ── HEADER ── */
-  .header {
-    background:var(--navy); padding:36px 52px 32px;
-    display:flex; justify-content:space-between; align-items:flex-end;
-  }
-  .header-left .eyebrow {
-    font-weight:500; font-size:7.5pt;
-    letter-spacing:0.18em; text-transform:uppercase;
-    color:var(--gold); margin-bottom:8px;
-  }
-  .header-left h1 {
-    font-family:'Playfair Display',serif;
-    font-size:30pt; font-weight:700; color:#fff;
-    letter-spacing:-0.01em; line-height:1.1;
-  }
-  .header-left h1 span { color:var(--gold); }
-  .header-left .tagline { margin-top:10px; color:#a8b8cc; font-size:10pt; font-weight:300; }
-  .header-right { text-align:right; }
-  .header-right .brand {
-    font-family:'Playfair Display',serif;
-    font-size:13pt; color:#fff; font-weight:600; letter-spacing:0.04em;
-  }
-  .header-right .brand-sub {
-    font-size:7pt; color:var(--gold);
-    letter-spacing:0.14em; text-transform:uppercase; margin-top:3px;
-  }
-  .gold-rule {
-    height:3px;
-    background:linear-gradient(90deg,var(--gold) 0%,var(--gold-light) 50%,transparent 100%);
-  }
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --ink:       #0c1622;
+  --ink-mid:   #162032;
+  --ink-soft:  #1e2f48;
+  --gold:      #c9a84c;
+  --gold-lt:   #e3c97a;
+  --gold-pale: #f5ead6;
+  --blue:      #1a56db;
+  --blue-lt:   #3b7ef8;
+  --blue-pale: #e8f0fe;
+  --blue-mid:  #1240a8;
+  --teal:      #2a7d78;
+  --teal-lt:   #e4f0ef;
+  --cream:     #faf7f2;
+  --warm-mid:  #f0ebe0;
+  --rule:      #ddd6c8;
+  --muted:     #7a8a9e;
+  --body-fg:   #3a4558;
+  --white:     #ffffff;
+  --radius:    6px;
+  --shadow:    0 4px 24px rgba(12,22,34,0.10);
+  --shadow-lg: 0 12px 48px rgba(12,22,34,0.16);
+}
 
-  /* ── BODY ── */
-  .body {
-    padding:36px 52px 28px;
-    display:grid; grid-template-columns:1fr 1px 1fr; gap:0 36px;
-  }
-  .divider-v { background:var(--rule); width:1px; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--body-fg);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
 
-  /* ── SECTION LABELS ── */
-  .section-label {
-    font-size:6.5pt; font-weight:500; letter-spacing:0.2em;
-    text-transform:uppercase; color:var(--gold); margin-bottom:10px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .section-label::after { content:''; flex:1; height:1px; background:var(--rule); }
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-  /* ── CHALLENGE ── */
-  .problem-block { margin-bottom:22px; }
-  .problem-block h2 {
-    font-family:'Playfair Display',serif;
-    font-size:13pt; font-weight:600; color:var(--navy);
-    margin-bottom:10px; line-height:1.3;
-  }
-  .problem-block p { color:#3a4a5c; margin-bottom:8px; font-size:9pt; }
-  .tension-stat {
-    border-left:3px solid var(--gold); padding:10px 14px;
-    background:rgba(201,168,76,0.07); margin:12px 0;
-    font-style:italic; font-size:9.5pt; color:var(--navy-mid); line-height:1.5;
-  }
-  .speed-line {
-    display:flex; align-items:center; gap:10px;
-    margin:10px 0; font-size:9pt; color:var(--navy); font-weight:500;
-  }
-  .speed-line .speed-dot {
-    width:6px; height:6px; border-radius:50%;
-    background:var(--gold); flex-shrink:0;
-  }
-  .why-now {
-    font-size:9pt; color:var(--navy); font-weight:500; font-style:italic;
-    margin-top:10px; padding:6px 0; border-top:1px solid var(--rule);
-  }
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
 
-  /* ── CAPABILITIES ── */
-  .capabilities { margin-bottom:22px; }
-  .cap-item { display:flex; gap:12px; margin-bottom:11px; align-items:flex-start; }
-  .cap-icon {
-    width:22px; height:22px; background:var(--navy); border-radius:50%;
-    flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px;
-  }
-  .cap-icon svg { width:10px; height:10px; fill:var(--gold); }
-  .cap-text strong { display:block; font-weight:500; font-size:9pt; color:var(--navy); margin-bottom:2px; }
-  .cap-text span { font-size:8.5pt; color:var(--muted); line-height:1.5; }
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(12,22,34,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav-product-large {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.nav-product-large span { color: var(--blue-lt); }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  padding-left: 1.5rem;
+}
+.nav-logo { height: 24px; width: auto; opacity: 0.85; }
+.nav-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+.nav-wordmark span { color: var(--gold); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold-lt); }
+.nav-cta {
+  background: var(--blue);
+  color: var(--white) !important;
+  font-weight: 500 !important;
+  padding: 0.45rem 1.25rem;
+  border-radius: var(--radius);
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--blue-mid) !important; }
 
-  /* ── IMPACT CARDS ── */
-  .impact-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
-  .impact-card { background:var(--navy); padding:14px 16px; border-radius:3px; }
-  .impact-card .impact-label {
-    font-size:7pt; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--gold); margin-bottom:6px; font-weight:500;
-  }
-  .impact-card .impact-body { font-size:8.5pt; color:#c8d6e5; line-height:1.5; font-weight:300; }
-  .no-integration-note {
-    font-size:8pt; color:var(--muted); text-align:center;
-    padding:7px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
-    margin-bottom:22px;
-  }
-  .no-integration-note strong { color:var(--navy); font-weight:500; }
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  background: var(--ink);
+  padding: 9rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 10% 50%, rgba(26,86,219,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 70% at 90% 30%, rgba(26,86,219,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 90%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-kicker { margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+.hero-kicker-divider { width: 32px; height: 2px; background: var(--gold); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.hero-title em { font-style: italic; color: var(--gold-lt); }
+.hero-body {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.58);
+  max-width: 480px;
+  margin-bottom: 2.25rem;
+  line-height: 1.75;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-lt); }
 
-  /* ── SERVES GRID ── */
-  .serves-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:22px; }
-  .serves-card {
-    border:1px solid var(--rule); border-top:2px solid var(--gold);
-    padding:10px 12px; background:white; border-radius:2px;
-  }
-  .serves-card .serves-role {
-    font-size:7.5pt; font-weight:500; color:var(--navy);
-    letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;
-  }
-  .serves-card p { font-size:8pt; color:#3a4a5c; line-height:1.5; }
+/* Hero right panel */
+.hero-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 1.75rem 2rem;
+  position: relative;
+}
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--blue-lt) 60%, transparent 100%);
+  border-radius: 10px 10px 0 0;
+}
+.panel-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-lt);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.signal-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.signal-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: 5px;
+  border-left: 3px solid transparent;
+  transition: background 0.2s;
+}
+.signal-row:nth-child(1) { border-left-color: var(--blue); }
+.signal-row:nth-child(2) { border-left-color: var(--blue-lt); }
+.signal-row:nth-child(3) { border-left-color: var(--blue-mid); }
+.signal-row:nth-child(4) { border-left-color: var(--gold); }
+.signal-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.dot-gold { background: var(--blue); }
+.dot-teal { background: var(--blue-lt); }
+.dot-blue { background: var(--blue-mid); }
+.dot-amber { background: var(--gold); }
+.signal-text strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.15rem;
+}
+.signal-text span {
+  font-size: 0.74rem;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.45;
+}
+.panel-footer {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+}
 
-  /* ── HOW IT WORKS ── */
-  .how-block { margin-bottom:22px; }
-  .how-step { display:flex; gap:12px; margin-bottom:9px; align-items:flex-start; }
-  .step-num {
-    width:20px; height:20px; border:1.5px solid var(--gold);
-    border-radius:50%; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:7pt; font-weight:500; color:var(--gold); margin-top:1px;
-  }
-  .step-text { font-size:8.5pt; color:#3a4a5c; line-height:1.55; padding-top:2px; }
-  .step-text strong { color:var(--navy); font-weight:500; }
+/* ── QUOTE STRIP ─────────────────────────────────────── */
+.quote-strip {
+  background: var(--blue);
+  border-top: none;
+  padding: 2.25rem 0;
+}
+.quote-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.quote-strip blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.55;
+  flex: 1;
+  border-left: 3px solid rgba(255,255,255,0.4);
+  padding-left: 1.5rem;
+}
+.quote-strip blockquote strong {
+  font-style: normal;
+  color: var(--gold-lt);
+}
+.quote-meta {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
 
-  /* ── GROUPED SIGNALS ── */
-  .signals-block { margin-bottom:0; }
-  .signals-intro { font-size:8.5pt; color:#3a4a5c; margin-bottom:10px; font-style:italic; }
-  .signals-columns { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .signal-group-label {
-    font-size:6.5pt; font-weight:500; letter-spacing:0.16em;
-    text-transform:uppercase; color:var(--gold); margin-bottom:7px;
-    padding-bottom:4px; border-bottom:1px solid var(--rule);
-  }
-  .signal-list { display:flex; flex-direction:column; gap:5px; }
-  .pill {
-    display:inline-block; border:1px solid var(--rule); border-radius:20px;
-    padding:4px 11px; font-size:7.5pt; color:var(--navy-mid);
-    background:white; font-weight:400;
-  }
-  .pill.highlight {
-    background:var(--navy); color:var(--gold);
-    border-color:var(--navy); font-weight:500;
-  }
+/* ── SECTION BASE ─────────────────────────────────────── */
+section { padding: 5.5rem 0; }
+.section-head { margin-bottom: 3.5rem; }
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: 0.6rem;
+}
+.section-head p {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 540px;
+  margin-top: 0.85rem;
+  line-height: 1.7;
+}
 
-  /* ── CALLOUT ── */
-  .highlight-row {
-    grid-column:1/-1; background:var(--navy);
-    padding:14px 20px; border-radius:3px;
-    margin-bottom:8px; display:flex; align-items:center; gap:16px;
-  }
-  .highlight-row .quote-mark {
-    font-family:'Playfair Display',serif;
-    font-size:40pt; color:var(--gold); line-height:0.7; flex-shrink:0;
-  }
-  .highlight-row .quote-text {
-    font-size:10pt; color:#e8f0f8; font-style:italic; line-height:1.5; font-weight:300;
-  }
-  .highlight-row .quote-text strong { color:var(--gold-light); font-style:normal; font-weight:500; }
+/* ── THE CHALLENGE ───────────────────────────────────── */
+.challenge-section {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.challenge-card {
+  padding: 1.75rem 1.5rem;
+  background: var(--cream);
+  border-radius: 8px;
+  border-top: 3px solid var(--blue);
+}
+.challenge-card .ch-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(201,168,76,0.25);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.challenge-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+}
+.challenge-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
 
-  /* ── GROWTH STATEMENT ── */
-  .growth-statement {
-    grid-column:1/-1; text-align:center;
-    font-size:9.5pt; font-weight:500; color:var(--navy);
-    border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
-    padding:10px 20px; margin-bottom:26px; letter-spacing:0.01em;
-  }
-  .growth-statement span { color:var(--gold); }
+/* ── SIGNALS ─────────────────────────────────────────── */
+.signals-section { background: var(--cream); }
+.signals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.signal-card {
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.signal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.signal-card-header {
+  background: var(--ink);
+  padding: 1.5rem 1.75rem;
+  position: relative;
+}
+.sc-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.sc-accent-gold  { background: linear-gradient(90deg, var(--blue), var(--blue-lt)); }
+.sc-accent-teal  { background: linear-gradient(90deg, var(--blue-mid), var(--blue)); }
+.sc-accent-blue  { background: linear-gradient(90deg, #1240a8, #1a56db); }
+.sc-accent-amber { background: linear-gradient(90deg, var(--blue), var(--blue-lt)); }
+.sc-type { color: var(--blue-lt); }
+.sc-teal  .sc-type { color: #7eb3ff; }
+.sc-blue  .sc-type { color: #7eb3ff; }
+.sc-amber .sc-type { color: var(--gold-lt); }
+.sc-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.sc-tagline {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+  line-height: 1.45;
+}
+.signal-card-body {
+  padding: 1.5rem 1.75rem;
+}
+.signal-card-body p {
+  font-size: 0.9rem;
+  color: var(--body-fg);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+.signal-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.sig-pill {
+  font-size: 0.7rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  background: var(--cream);
+}
+.sig-pill.active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
 
-  /* ── EXAMPLE ── */
-  .example-section {
-    grid-column:1/-1; border:1px solid var(--rule); border-left:3px solid var(--gold);
-    background:#fff; padding:16px 20px; margin-top:4px;
-  }
-  .example-section .ex-label {
-    font-size:6.5pt; font-weight:500; letter-spacing:0.2em;
-    text-transform:uppercase; color:var(--gold); margin-bottom:10px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .example-section .ex-label::after { content:''; flex:1; height:1px; background:var(--rule); }
-  .example-section .ex-title {
-    font-family:'Playfair Display',serif;
-    font-size:10.5pt; font-weight:600; color:var(--navy); margin-bottom:10px;
-  }
-  .ex-flow { display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr; align-items:center; }
-  .ex-step { background:var(--cream); border:1px solid var(--rule); border-radius:3px; padding:10px 12px; }
-  .ex-step .ex-step-label { font-size:6pt; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
-  .ex-step p { font-size:8pt; color:#3a4a5c; line-height:1.5; }
-  .ex-arrow { text-align:center; color:var(--gold); font-size:14pt; font-weight:300; }
-  .ex-result { background:var(--navy); border-radius:3px; padding:10px 12px; }
-  .ex-result .ex-step-label { font-size:6pt; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:4px; }
-  .ex-result p { font-size:8pt; color:#c8d6e5; line-height:1.5; }
+/* ── PERSONAS ─────────────────────────────────────────── */
+.personas-section {
+  background: var(--blue-mid);
+  position: relative;
+  overflow: hidden;
+}
+.personas-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 85% 40%, rgba(59,126,248,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 15% 70%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.personas-section .section-head h2 { color: var(--white); }
+.personas-section .section-head p  { color: rgba(255,255,255,0.55); }
+.personas-section .label { color: var(--gold-lt); }
+.personas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+.persona-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.persona-card:hover {
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(201,168,76,0.05);
+}
+.persona-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.persona-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+.persona-inst {
+  font-size: 0.7rem;
+  color: var(--blue-lt);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+.persona-gain {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+}
+.persona-gain strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
 
-  /* ── CLOSING STATEMENT ── */
-  .closing-statement {
-    background:var(--navy); padding:20px 52px;
-    text-align:center;
-  }
-  .closing-statement p {
-    font-family:'Playfair Display',serif;
-    font-size:11.5pt; font-weight:400; color:#e8f0f8;
-    line-height:1.6; font-style:italic;
-  }
-  .closing-statement p strong { color:var(--gold-light); font-style:normal; font-weight:600; }
+/* ── HOW IT WORKS ────────────────────────────────────── */
+.how-section {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.how-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1.25rem;
+}
+.how-left p {
+  font-size: 0.97rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.how-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.how-step:last-child { border-bottom: none; }
+.step-num {
+  width: 32px;
+  height: 32px;
+  background: var(--blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-content strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.step-content span {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
 
-  /* ── FOOTER ── */
-  .footer {
-    background:var(--navy); padding:14px 52px;
-    display:flex; justify-content:space-between; align-items:center;
-    border-top:1px solid #1e3450;
-  }
-  .footer-left { font-size:8pt; color:#a8b8cc; font-weight:300; }
-  .footer-left strong { color:white; font-weight:500; }
-  .footer-cta { text-align:right; }
-  .footer-cta .cta-label { font-size:6.5pt; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:3px; }
-  .footer-cta .contact { font-size:8.5pt; color:white; font-weight:500; }
-  .footer-cta .email { font-size:8pt; color:var(--gold-light); font-weight:300; margin-top:2px; }
+/* Outcomes right */
+.how-right {}
+.outcome-block {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--rule);
+  margin-bottom: 1.25rem;
+}
+.outcome-block:last-child { margin-bottom: 0; }
+.ob-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.ob-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.ob-body {
+  font-size: 0.87rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
 
-  @media print { body { background:white; } .page { width:100%; } }
+/* ── CTA SECTION ─────────────────────────────────────── */
+.cta-section {
+  background: var(--warm-mid);
+  border-top: 1px solid var(--rule);
+}
+.cta-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.cta-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1rem;
+}
+.cta-left p {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  max-width: 420px;
+}
+.cta-right {
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  padding: 2.25rem 2.5rem;
+}
+.cta-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.cta-title { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+.contact-detail .icon {
+  width: 34px; height: 34px;
+  background: var(--gold-pale);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.contact-detail .val { font-size: 0.9rem; color: var(--ink); }
+.contact-detail a { color: var(--ink); border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+.contact-detail a:hover { border-color: var(--gold); }
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 1.75rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-contact:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  border-top: 3px solid var(--gold);
+  padding: 2.75rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.footer-brand span { color: var(--gold); }
+.footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner, .how-grid, .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .challenge-grid, .signals-grid { grid-template-columns: 1fr; }
+  .personas-grid { grid-template-columns: 1fr 1fr; }
+  .quote-strip-inner { flex-direction: column; gap: 1rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 0 4rem; }
+}
+@media (max-width: 560px) {
+  .personas-grid { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
 </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-left">
-      <div class="eyebrow">Executive Brief &nbsp;·&nbsp; Commercial &amp; Retail Banking</div>
-      <h1>Clarity<span>360</span></h1>
-      <div class="tagline">Decision intelligence for the whole institution — not just one team</div>
+<!-- ── NAV ──────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <div class="nav-product-large">Clarity<span>360</span></div>
     </div>
-    <div class="header-right">
-      <div class="brand">Loyto.ai</div>
-      <div class="brand-sub">Decision Intelligence</div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#signals">Signals</a></li>
+        <li><a href="#personas">Who It Serves</a></li>
+        <li><a href="#conversation" class="nav-cta">Start a Conversation</a></li>
+      </ul>
+      <a href="/" class="nav-brand">
+        <img src="loyto_icon_gold.png" alt="Loyto.ai" class="nav-logo">
+        <span class="nav-wordmark">Loyto<span>.ai</span></span>
+      </a>
     </div>
   </div>
-  <div class="gold-rule"></div>
+</nav>
 
-  <!-- BODY -->
-  <div class="body">
-
-    <!-- CALLOUT -->
-    <div style="grid-column:1/-1; margin-bottom:10px;">
-      <div class="highlight-row">
-        <div class="quote-mark">"</div>
-        <div class="quote-text">
-          Growth opportunities and risk signals exist in every bank's data today.
-          The institutions that win are those that surface them
-          <strong>across every function — consistently, at speed, and at scale.</strong>
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <div class="label" style="color:var(--blue-lt);">Clarity360</div>
+          <div class="hero-kicker-divider" style="background:var(--blue-lt);"></div>
+          <div class="label" style="color:rgba(255,255,255,0.35);">Community Financial Intelligence</div>
         </div>
-      </div>
-    </div>
-
-    <!-- GROWTH STATEMENT -->
-    <div class="growth-statement">
-      Clarity360 is designed to drive organic growth from your existing customer base —
-      <span>as a shared intelligence layer across your entire organization.</span>
-    </div>
-
-    <!-- LEFT COLUMN -->
-    <div class="left-col">
-
-      <div class="problem-block">
-        <div class="section-label">The Challenge</div>
-        <h2>The data exists. The ability to act on it — consistently and at scale — does not.</h2>
-        <p>Growth signals and risk indicators are buried in your core systems. They reach the right people too slowly, too inconsistently, and never in a form that drives immediate action.</p>
-        <div class="tension-stat">
-          Banks with strong organic growth capability generate up to <strong>40% more revenue per relationship</strong> than peers relying on new customer acquisition alone.
-        </div>
-        <p>The gap isn't data. It's institutional intelligence — the ability to convert what you already know into consistent, timely action across every team.</p>
-        <!-- SPEED LINE -->
-        <div class="speed-line">
-          <div class="speed-dot"></div>
-          Signals and opportunities are delivered in near real time — not weeks later in a report.
-        </div>
-        <div class="why-now">
-          Banks that win today are not those with more data — but those that act on it faster and more consistently across every function.
+        <h1 class="hero-title">
+          More revenue from<br>
+          the relationships<br>
+          <em>you already have.</em>
+        </h1>
+        <p class="hero-body">
+          Community banks, credit unions, and small financial institutions hold thousands of customer and member relationships. The intelligence to grow them, protect them, and deepen them is already in your data. Clarity360 surfaces it — automatically, every day, for every banker on your team.
+        </p>
+        <div class="hero-actions">
+          <a href="#conversation" class="btn-primary">Start a Conversation →</a>
+          <a href="#signals" class="btn-ghost">See the Signals</a>
         </div>
       </div>
 
-      <div class="capabilities">
-        <div class="section-label">What Clarity360 Does</div>
-
-        <div class="cap-item">
-          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
-          <div class="cap-text">
-            <strong>Surfaces growth opportunities institution-wide</strong>
-            <span>Identifies and prioritizes treasury, credit, deposit, and merchant opportunities based on revenue potential and timing — across every portfolio, region, and segment.</span>
-          </div>
-        </div>
-
-        <div class="cap-item">
-          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
-          <div class="cap-text">
-            <strong>Detects risk signals before they escalate</strong>
-            <span>Flags liquidity stress, deposit instability, and credit deterioration early — so the right team can intervene before relationships or assets are at risk.</span>
-          </div>
-        </div>
-
-        <div class="cap-item">
-          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
-          <div class="cap-text">
-            <strong>Delivers ranked, actionable intelligence to every role</strong>
-            <span>From RM to executive leadership — every signal is explained, prioritized, and paired with a recommended next step.</span>
-          </div>
-        </div>
-
-        <div class="cap-item">
-          <div class="cap-icon"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/></svg></div>
-          <div class="cap-text">
-            <strong>Creates consistency across the institution</strong>
-            <span>Every region, every portfolio, every team operates from the same intelligence — eliminating the performance gap between your best people and the rest.</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- VERTICAL DIVIDER -->
-    <div class="divider-v"></div>
-
-    <!-- RIGHT COLUMN -->
-    <div class="right-col">
-
-      <!-- IMPACT -->
-      <div class="section-label">Business Impact</div>
-      <div class="impact-grid">
-        <div class="impact-card">
-          <div class="impact-label">Organic Revenue Growth</div>
-          <div class="impact-body">Prioritized opportunities across every portfolio — ranked by revenue potential, confidence, and urgency — so no relationship is overlooked.</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-label">Relationship Retention</div>
-          <div class="impact-body">Institution-wide early warning signals protect your highest-value relationships before stress becomes attrition.</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-label">Execution Consistency</div>
-          <div class="impact-body">Every team — RMs, credit, treasury, branch — acts from the same intelligence with the same clarity, across every region and segment.</div>
-        </div>
-        <div class="impact-card">
-          <div class="impact-label">Leadership Visibility</div>
-          <div class="impact-body">A real-time view of portfolio health, opportunity pipeline, risk concentration, and team execution across the whole institution.</div>
-        </div>
-      </div>
-      <!-- NO INTEGRATION REPEAT -->
-      <div class="no-integration-note">
-        <strong>No changes to core systems.</strong> No disruption to existing operations. Deployed rapidly alongside what you already have.
-      </div>
-
-      <!-- WHO IT SERVES -->
-      <div class="section-label">Intelligence Across Every Function</div>
-      <div class="serves-grid" style="margin-bottom:22px;">
-        <div class="serves-card">
-          <div class="serves-role">Relationship Managers</div>
-          <p>Know exactly who to call, why, and what to say — with talking points prepared and next steps clear.</p>
-        </div>
-        <div class="serves-card">
-          <div class="serves-role">Credit &amp; Risk Teams</div>
-          <p>Early warning signals surface before deterioration escalates — enabling timely, data-driven decisions.</p>
-        </div>
-        <div class="serves-card">
-          <div class="serves-role">Treasury Officers</div>
-          <p>Cross-sell readiness and service gaps identified automatically — with revenue estimates attached.</p>
-        </div>
-        <div class="serves-card">
-          <div class="serves-role">Executive Leadership</div>
-          <p>Full visibility into growth pipeline, risk concentration, and execution consistency across all regions.</p>
-        </div>
-      </div>
-
-      <!-- HOW IT WORKS -->
-      <div class="how-block">
-        <div class="section-label">How It Works</div>
-        <div class="how-step">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>Connects to your existing data</strong> — transaction files, account exports, and CSV extracts. No core system integration required.</div>
-        </div>
-        <div class="how-step">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>Analyzes behavioral and financial patterns</strong> across every account, loan, treasury service, and merchant relationship.</div>
-        </div>
-        <div class="how-step">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>Generates ranked signals and opportunities</strong> with estimated revenue, urgency scores, and confidence ratings — in near real time.</div>
-        </div>
-        <div class="how-step">
-          <div class="step-num">4</div>
-          <div class="step-text"><strong>Delivers prioritized actions</strong> to the right team, at the right time — with context, talking points, and a clear recommended next step.</div>
-        </div>
-      </div>
-
-      <!-- GROUPED SIGNALS -->
-      <div class="signals-block">
-        <div class="section-label">Example Signals</div>
-        <p class="signals-intro">Clarity360 continuously generates signals such as:</p>
-        <div class="signals-columns">
-          <div>
-            <div class="signal-group-label">Growth Signals</div>
-            <div class="signal-list">
-              <span class="pill highlight">Treasury opportunity detected</span>
-              <span class="pill highlight">Credit expansion signal</span>
-              <span class="pill">Merchant volume growth</span>
-              <span class="pill">Cross-sell readiness: deposits</span>
-              <span class="pill">Strong cash flow, no treasury services</span>
+      <div class="hero-right">
+        <div class="hero-panel">
+          <div class="panel-label">Live signal examples</div>
+          <div class="signal-preview">
+            <div class="signal-row">
+              <div class="signal-dot dot-gold"></div>
+              <div class="signal-text">
+                <strong>Treasury opportunity detected</strong>
+                <span>Member cash flow pattern suggests unmet treasury management need — estimated revenue opportunity flagged.</span>
+              </div>
+            </div>
+            <div class="signal-row">
+              <div class="signal-dot dot-teal"></div>
+              <div class="signal-text">
+                <strong>Early warning: deposit outflow</strong>
+                <span>Behavioral shift in a commercial relationship detected weeks before a formal review would surface it.</span>
+              </div>
+            </div>
+            <div class="signal-row">
+              <div class="signal-dot dot-blue"></div>
+              <div class="signal-text">
+                <strong>Cross-sell readiness: mortgage</strong>
+                <span>Life event trigger identified in member account activity. Relationship is ready for a proactive conversation.</span>
+              </div>
+            </div>
+            <div class="signal-row">
+              <div class="signal-dot dot-amber"></div>
+              <div class="signal-text">
+                <strong>Credit expansion signal</strong>
+                <span>Revenue growth and strong repayment history indicate borrower is ready for a limit increase conversation.</span>
+              </div>
             </div>
           </div>
-          <div>
-            <div class="signal-group-label">Risk Signals</div>
-            <div class="signal-list">
-              <span class="pill">Deposit balance decline</span>
-              <span class="pill">At-risk relationship flagged</span>
-              <span class="pill">LOC utilization trending up</span>
-              <span class="pill">Credit deterioration indicators</span>
-              <span class="pill">New product gap identified</span>
-            </div>
+          <div class="panel-footer">
+            Signals delivered to your team every morning — with context, talking points, and a recommended next step.
           </div>
         </div>
       </div>
-
-    </div>
-
-    <!-- EXAMPLE SCENARIO -->
-    <div class="example-section">
-      <div class="ex-label">From Insight to Revenue — A Real Example</div>
-      <div class="ex-title">Turning a Signal into a New Treasury Relationship</div>
-      <div class="ex-flow">
-        <div class="ex-step">
-          <div class="ex-step-label">Signal Detected</div>
-          <p>A commercial client shows rising deposits and increasing transaction volume — but no treasury services enrolled.</p>
-        </div>
-        <div class="ex-arrow">›</div>
-        <div class="ex-step">
-          <div class="ex-step-label">Opportunity Flagged</div>
-          <p>Clarity360 flags a high-confidence treasury opportunity with estimated annual revenue and urgency score — in near real time.</p>
-        </div>
-        <div class="ex-arrow">›</div>
-        <div class="ex-step">
-          <div class="ex-step-label">Teams Equipped</div>
-          <p>The RM and treasury officer each receive a prioritized task with talking points and a recommended next step.</p>
-        </div>
-        <div class="ex-arrow">›</div>
-        <div class="ex-result">
-          <div class="ex-step-label">Outcome</div>
-          <p>New treasury relationship established within days. Wallet share increased. No data mining required.</p>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /body -->
-
-  <!-- CLOSING STATEMENT -->
-  <div class="closing-statement">
-    <p>
-      Clarity360 turns your bank's existing data into
-      <strong>coordinated action across your entire institution</strong>
-      — driving growth, protecting relationships, and improving execution at scale.
-    </p>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-left">
-      <strong>Loyto.ai</strong> &nbsp;·&nbsp; Clarity360 Decision Intelligence Platform<br>
-      Deployed alongside existing systems · No disruption to core operations · Rapid time-to-value
-    </div>
-    <div class="footer-cta">
-      <div class="cta-label">Request a conversation</div>
-      <div class="contact">Sowmya Sridhar</div>
-      <div class="email">sowmyas@loyto.ai</div>
     </div>
   </div>
+</section>
 
+<!-- ── QUOTE STRIP ────────────────────────────────────── -->
+<div class="quote-strip">
+  <div class="container">
+    <div class="quote-strip-inner">
+      <blockquote>
+        Most community financial institutions are not limited by capital or products.<br>
+        They are limited by <strong>visibility and execution.</strong> The growth is already inside the portfolio.
+      </blockquote>
+      <div class="quote-meta">Clarity360 &nbsp;·&nbsp; Loyto.ai</div>
+    </div>
+  </div>
 </div>
+
+<!-- ── THE CHALLENGE ──────────────────────────────────── -->
+<section class="challenge-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">The Challenge</div>
+      <h2>The intelligence exists.<br>It has simply never been surfaced.</h2>
+      <p>Community banks, credit unions, and small financial institutions face the same structural problem — relationship complexity they cannot fully analyze with the staff they have.</p>
+    </div>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <div class="ch-num">01</div>
+        <h3>Data is fragmented across systems</h3>
+        <p>Loan systems, core banking platforms, deposit data, and transaction history sit in separate places. No single view of the full relationship exists — so opportunities and risks stay hidden.</p>
+      </div>
+      <div class="challenge-card">
+        <div class="ch-num">02</div>
+        <h3>Bankers are stretched too thin</h3>
+        <p>A relationship manager handling hundreds of accounts cannot manually analyze each one for risk signals, growth readiness, or life event triggers. The work exists — the time does not.</p>
+      </div>
+      <div class="challenge-card">
+        <div class="ch-num">03</div>
+        <h3>Insight arrives too late</h3>
+        <p>By the time a problem surfaces in a quarterly review or a member quietly leaves, the opportunity to act has already passed. Community financial institutions need intelligence that arrives before the fact — not after.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SIGNALS ────────────────────────────────────────── -->
+<section class="signals-section" id="signals">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">The Intelligence Layer</div>
+      <h2>Four types of signals.<br>One unified intelligence layer.</h2>
+      <p>Clarity360 reasons across your institution's data using four distinct signal types — each designed to surface a different kind of intelligence your team can act on immediately.</p>
+    </div>
+    <div class="signals-grid">
+
+      <div class="signal-card sc-gold">
+        <div class="signal-card-header">
+          <div class="sc-accent sc-accent-gold"></div>
+          <div class="sc-type">Analytical Signals</div>
+          <div class="sc-name">Pattern Intelligence</div>
+          <div class="sc-tagline">What the data is telling you right now — across every relationship, simultaneously.</div>
+        </div>
+        <div class="signal-card-body">
+          <p>Clarity360 continuously analyzes transaction patterns, account behaviors, and financial ratios across your entire portfolio — surfacing meaningful signals that no analyst could find manually at scale. Every relationship is assessed, every day, without anyone having to ask.</p>
+          <div class="signal-examples">
+            <span class="sig-pill active">Revenue opportunity</span>
+            <span class="sig-pill active">Deposit concentration</span>
+            <span class="sig-pill">Utilization trend</span>
+            <span class="sig-pill">Cash flow pattern</span>
+            <span class="sig-pill">Balance velocity</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="signal-card sc-teal">
+        <div class="signal-card-header">
+          <div class="sc-accent sc-accent-teal"></div>
+          <div class="sc-type">Forecasting Signals</div>
+          <div class="sc-name">Forward Intelligence</div>
+          <div class="sc-tagline">What is likely to happen next — before it does.</div>
+        </div>
+        <div class="signal-card-body">
+          <p>Clarity360 identifies early behavioral indicators that predict future customer and member actions — a relationship about to drift, a borrower under growing stress, a member approaching a major life event. You get weeks of advance notice, not a post-mortem after the fact.</p>
+          <div class="signal-examples">
+            <span class="sig-pill active">Attrition risk</span>
+            <span class="sig-pill active">Life event trigger</span>
+            <span class="sig-pill">Covenant drift</span>
+            <span class="sig-pill">Renewal readiness</span>
+            <span class="sig-pill">Stress indicator</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="signal-card sc-blue">
+        <div class="signal-card-header">
+          <div class="sc-accent sc-accent-blue"></div>
+          <div class="sc-type">Knowledge Graph Signals</div>
+          <div class="sc-name">Relationship Intelligence</div>
+          <div class="sc-tagline">Connections across entities that no single system can see alone.</div>
+        </div>
+        <div class="signal-card-body">
+          <p>Clarity360 builds a knowledge graph of your institution's entire relationship network — connecting customers, members, businesses, guarantors, and accounts in ways that reveal risk concentrations, cross-relationship opportunities, and network-level insights invisible to any individual system.</p>
+          <div class="signal-examples">
+            <span class="sig-pill active">Concentration risk</span>
+            <span class="sig-pill active">Relationship network</span>
+            <span class="sig-pill">Guarantor exposure</span>
+            <span class="sig-pill">Entity linkage</span>
+            <span class="sig-pill">Portfolio topology</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="signal-card sc-amber">
+        <div class="signal-card-header">
+          <div class="sc-accent sc-accent-amber"></div>
+          <div class="sc-type">Machine Learning Signals</div>
+          <div class="sc-name">Adaptive Intelligence</div>
+          <div class="sc-tagline">Scoring that improves with every interaction — specific to your institution.</div>
+        </div>
+        <div class="signal-card-body">
+          <p>Clarity360 deploys models that learn from your institution's own portfolio characteristics — not industry averages. Opportunity scores, risk ratings, and propensity models are continuously refined as your data grows, making the system more accurate and more valuable the longer it runs.</p>
+          <div class="signal-examples">
+            <span class="sig-pill active">Opportunity score</span>
+            <span class="sig-pill active">Risk rating</span>
+            <span class="sig-pill">Propensity model</span>
+            <span class="sig-pill">Confidence index</span>
+            <span class="sig-pill">Priority ranking</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PERSONAS ────────────────────────────────────────── -->
+<section class="personas-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Who It Serves</div>
+      <h2>Built for the people who<br>carry the relationship.</h2>
+      <p>Clarity360 delivers the right intelligence to the right person — in the language they use, for the decisions they make every day.</p>
+    </div>
+    <div class="personas-grid">
+
+      <div class="persona-card">
+        <div class="persona-icon">🤝</div>
+        <div class="persona-role">Relationship Manager / Banker</div>
+        <div class="persona-inst">Banks &amp; Credit Unions</div>
+        <div class="persona-gain">Starts every day with a prioritized list of who to call, why to call them, and what to say — <strong>without searching a single system.</strong></div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-icon">🏪</div>
+        <div class="persona-role">Branch Manager</div>
+        <div class="persona-inst">Community Banks &amp; Credit Unions</div>
+        <div class="persona-gain">Sees branch portfolio health, opportunity pipeline, and at-risk relationships in one view — <strong>strategy built on intelligence, not instinct.</strong></div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-icon">📋</div>
+        <div class="persona-role">Loan Officer / Credit Analyst</div>
+        <div class="persona-inst">Community Banks</div>
+        <div class="persona-gain">Early warning signals surface weeks before a formal review — <strong>protecting the portfolio before problems become losses.</strong></div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-icon">👥</div>
+        <div class="persona-role">Member Services Officer</div>
+        <div class="persona-inst">Credit Unions</div>
+        <div class="persona-gain">Identifies which members are ready for a new product, at risk of leaving, or approaching a major financial milestone — <strong>deepening every member relationship.</strong></div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-icon">🏛️</div>
+        <div class="persona-role">CEO / President</div>
+        <div class="persona-inst">Banks &amp; Credit Unions</div>
+        <div class="persona-gain">Live portfolio view — relationship health, concentration risk, and competitive signals — <strong>board reporting from live data, not last quarter's spreadsheet.</strong></div>
+      </div>
+
+      <div class="persona-card">
+        <div class="persona-icon">⚖️</div>
+        <div class="persona-role">Chief Compliance Officer / BSA</div>
+        <div class="persona-inst">Banks &amp; Credit Unions</div>
+        <div class="persona-gain">Every signal and decision is automatically lineage-tracked. Regulatory documentation always exists — <strong>never assembled when the examiner asks.</strong></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<section class="how-section">
+  <div class="container">
+    <div class="how-grid">
+      <div class="how-left">
+        <div class="label">How It Works</div>
+        <h2>No disruption.<br>Rapid time to value.</h2>
+        <p>Clarity360 connects to your existing data — no core system integration required, no lengthy implementation, no new infrastructure to manage.</p>
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Connects to your existing data</strong>
+              <span>Transaction exports, account files, and core system data — Clarity360 works with what you already have. No API integration required to get started.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Builds your institution's knowledge graph</strong>
+              <span>Relationships between customers, members, accounts, and entities are mapped and continuously updated — revealing intelligence invisible to any single system.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Generates ranked signals and scores</strong>
+              <span>Every relationship receives an opportunity score, risk rating, and priority ranking — updated daily, specific to your institution's own portfolio characteristics.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>Delivers actionable intelligence to your team</strong>
+              <span>Prioritized daily tasks arrive for every relationship manager — with context, talking points, and a clear recommended next step. Your team acts, not searches.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-right">
+        <div class="label" style="margin-bottom:1.25rem;">Business outcomes</div>
+        <div class="outcome-block">
+          <div class="ob-label">Revenue Growth</div>
+          <div class="ob-title">More from the relationships you already have</div>
+          <div class="ob-body">Cross-sell conversion improves when bankers reach the right customer at the right moment with a relevant reason to act. Clarity360 identifies that moment automatically — across every relationship in your portfolio.</div>
+        </div>
+        <div class="outcome-block">
+          <div class="ob-label">Risk &amp; Retention</div>
+          <div class="ob-title">Problems surfaced before they become losses</div>
+          <div class="ob-body">Early warning signals give your team weeks to intervene — not days to react. Relationships that would have quietly left or quietly deteriorated are identified and addressed before the window closes.</div>
+        </div>
+        <div class="outcome-block">
+          <div class="ob-label">Banker Productivity</div>
+          <div class="ob-title">Less searching. More conversations.</div>
+          <div class="ob-body">Your relationship managers spend time with customers and members — not in systems. Clarity360 does the analysis, surfaces the insight, and hands your team a reason to make the call.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="cta-section" id="conversation">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <div class="label">Start a Conversation</div>
+        <h2>Let's talk about your portfolio.</h2>
+        <p>Whether you are a community bank, a credit union, or a small financial institution — if your team is making relationship decisions without a full intelligence layer, we would like to understand your situation and show you what Clarity360 surfaces.</p>
+      </div>
+      <div class="cta-right">
+        <div class="cta-name">Sowmya Sridhar</div>
+        <div class="cta-title">Chief Executive Officer, Loyto.ai</div>
+        <div class="contact-detail">
+          <div class="icon">✉</div>
+          <div class="val"><a href="mailto:sowmyas@loyto.ai">sowmyas@loyto.ai</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">🌐</div>
+          <div class="val"><a href="https://loyto.ai">loyto.ai</a></div>
+        </div>
+        <a href="mailto:sowmyas@loyto.ai?subject=Clarity360 — Start a Conversation" class="btn-contact">Start a Conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Clarity<span>360</span></div>
+        <div class="footer-tagline">Community Financial Intelligence · Loyto.ai · 2026</div>
+      </div>
+      <div class="footer-copy">© 2026 Loyto.ai · All rights reserved</div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
