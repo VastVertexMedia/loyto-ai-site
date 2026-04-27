@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transit Assistant — From Scheduling to Strategy · Loyto.ai</title>
+<meta name="description" content="Transit Assistant is a unified transit operations and intelligence platform — serving 40+ programs and 1.6 million rides annually across rural, urban, paratransit, and NEMT services.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --ink:        #0e1624;
+  --ink-mid:    #152038;
+  --ink-soft:   #1c2d4a;
+  --slate:      #3a6ea8;
+  --slate-lt:   #5a8fc8;
+  --slate-pale: #e8f0f8;
+  --slate-dark: #1e3f6a;
+  --slate-bright:#6baed6;
+  --gold:       #c9a84c;
+  --gold-lt:    #e3c97a;
+  --gold-pale:  #f5ead6;
+  --cream:      #f6f8fb;
+  --warm-mid:   #edf2f7;
+  --rule:       #cdd8e8;
+  --muted:      #6b7d96;
+  --body-fg:    #2d3a4e;
+  --white:      #ffffff;
+  --radius:     6px;
+  --shadow:     0 4px 24px rgba(14,22,36,0.10);
+  --shadow-lg:  0 12px 48px rgba(14,22,36,0.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--body-fg);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(14,22,36,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(58,110,168,0.25);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.nav-left { display: flex; align-items: center; }
+.nav-product-large {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.nav-product-large span { color: var(--slate-bright); }
+.nav-right { display: flex; align-items: center; gap: 1.75rem; }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.nav-links a:hover { color: var(--slate-bright); }
+.nav-cta {
+  background: var(--slate);
+  color: var(--white) !important;
+  font-weight: 500 !important;
+  padding: 0.45rem 1.25rem;
+  border-radius: var(--radius);
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--slate-lt) !important; }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding-left: 1.5rem;
+}
+.nav-logo { height: 24px; width: auto; opacity: 0.8; }
+.nav-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
+.nav-wordmark span { color: var(--gold); }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  background: var(--ink);
+  padding: 9rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 5% 50%, rgba(58,110,168,0.2) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 95% 20%, rgba(107,174,214,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 55% 90%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(58,110,168,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,110,168,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.hero-eyebrow-bar { width: 32px; height: 2px; background: var(--slate-bright); }
+.hero-scale-line {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.hero-scale-line strong { color: var(--slate-bright); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.3rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.13;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.hero-title em { font-style: italic; color: var(--slate-bright); }
+.hero-sub {
+  font-size: 1.0rem;
+  color: rgba(255,255,255,0.52);
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+  max-width: 500px;
+}
+.hero-body {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.45);
+  max-width: 480px;
+  margin-bottom: 2.25rem;
+  line-height: 1.75;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--slate);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--slate-lt); transform: translateY(-2px); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.65);
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--slate-bright); color: var(--slate-bright); }
+
+/* Hero right — operations dashboard panel */
+.hero-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(58,110,168,0.25);
+  border-radius: 10px;
+  padding: 1.75rem 2rem;
+  position: relative;
+}
+.hero-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--slate) 0%, var(--slate-bright) 60%, transparent 100%);
+  border-radius: 10px 10px 0 0;
+}
+.panel-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate-bright);
+  margin-bottom: 1.1rem;
+  font-weight: 500;
+}
+.nlq-query {
+  background: rgba(58,110,168,0.12);
+  border: 1px solid rgba(58,110,168,0.2);
+  border-radius: 5px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+  line-height: 1.5;
+}
+.nlq-query::before {
+  content: '⟩ ';
+  color: var(--slate-bright);
+  font-style: normal;
+  font-weight: 600;
+}
+.ops-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.op-stat {
+  background: rgba(255,255,255,0.04);
+  border-radius: 5px;
+  padding: 0.65rem 0.75rem;
+  text-align: center;
+}
+.op-stat .op-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--slate-bright);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.op-stat .op-label {
+  font-size: 0.64rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.3;
+}
+.ops-rows { display: flex; flex-direction: column; gap: 0.55rem; }
+.op-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+}
+.op-row.active { border-left-color: var(--slate-bright); }
+.op-row.mid    { border-left-color: var(--gold); }
+.op-row.low    { border-left-color: rgba(255,255,255,0.18); }
+.op-row-text strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+.op-row-text span { font-size: 0.71rem; color: rgba(255,255,255,0.38); line-height: 1.4; }
+.panel-footer {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.28);
+  font-style: italic;
+}
+
+/* ── PROOF STRIP ─────────────────────────────────────── */
+.proof-strip {
+  background: var(--slate-dark);
+  padding: 0;
+}
+.proof-strip-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.proof-stat {
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.proof-stat:last-child { border-right: none; }
+.proof-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.proof-num span { color: var(--slate-bright); }
+.proof-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.45;
+}
+
+/* ── QUOTE STRIP ─────────────────────────────────────── */
+.quote-strip {
+  background: var(--slate);
+  padding: 2.25rem 0;
+}
+.quote-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.quote-strip blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.55;
+  flex: 1;
+  border-left: 3px solid rgba(255,255,255,0.35);
+  padding-left: 1.5rem;
+}
+.quote-strip blockquote strong { font-style: normal; color: var(--gold-lt); }
+.quote-meta {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── SECTION BASE ─────────────────────────────────────── */
+section { padding: 5.5rem 0; }
+.section-head { margin-bottom: 3.5rem; }
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-top: 0.6rem;
+}
+.section-head p {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin-top: 0.85rem;
+  line-height: 1.7;
+}
+
+/* ── CORE OPS ────────────────────────────────────────── */
+.ops-section {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.ops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.ops-card {
+  padding: 1.75rem 1.5rem;
+  background: var(--cream);
+  border-radius: 8px;
+  border-top: 3px solid var(--slate);
+  transition: box-shadow 0.2s;
+}
+.ops-card:hover { box-shadow: var(--shadow); }
+.ops-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+.ops-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+  line-height: 1.3;
+}
+.ops-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+.ops-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+.ops-tag {
+  font-size: 0.68rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  background: var(--white);
+}
+
+/* ── INTELLIGENCE ────────────────────────────────────── */
+.intel-section { background: var(--cream); }
+.intel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.intel-card {
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.intel-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.intel-card-header {
+  background: var(--ink);
+  padding: 1.5rem 1.75rem;
+  position: relative;
+}
+.ic-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.ic-accent-1 { background: linear-gradient(90deg, var(--slate), var(--slate-bright)); }
+.ic-accent-2 { background: linear-gradient(90deg, var(--slate-dark), var(--slate)); }
+.ic-accent-3 { background: linear-gradient(90deg, #1a3d6a, var(--slate)); }
+.ic-accent-4 { background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+.ic-type {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.ic-type-1 { color: var(--slate-bright); }
+.ic-type-2 { color: #7eb3f0; }
+.ic-type-3 { color: #a0c8f0; }
+.ic-type-4 { color: var(--gold-lt); }
+.ic-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.ic-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.42); font-style: italic; line-height: 1.45; }
+.intel-card-body { padding: 1.5rem 1.75rem; }
+.intel-card-body p { font-size: 0.9rem; color: var(--body-fg); line-height: 1.7; margin-bottom: 1.25rem; }
+.nlq-examples {
+  background: var(--cream);
+  border-radius: 5px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--rule);
+}
+.nlq-examples-label {
+  font-size: 0.63rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+.nlq-example-row {
+  font-size: 0.78rem;
+  color: var(--body-fg);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-style: italic;
+}
+.nlq-example-row:last-child { border-bottom: none; }
+.nlq-example-row::before { content: '⟩ '; color: var(--slate); font-style: normal; font-weight: 600; }
+.sig-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.sig-pill {
+  font-size: 0.7rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  background: var(--cream);
+}
+.sig-pill.active {
+  background: var(--slate);
+  color: var(--white);
+  border-color: var(--slate);
+}
+
+/* ── ASSET MANAGEMENT ────────────────────────────────── */
+.asset-section {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.asset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.asset-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1.25rem;
+}
+.asset-left p {
+  font-size: 0.97rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.lifecycle-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.lifecycle-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--cream);
+  transition: background 0.2s;
+}
+.lifecycle-step:last-child { border-bottom: none; }
+.lifecycle-step:hover { background: var(--slate-pale); }
+.ls-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--slate);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ls-content strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.ls-content span {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.asset-right {}
+.asset-module-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.amc {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.25rem;
+  border-top: 3px solid var(--slate);
+}
+.amc-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+.amc h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.amc p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+/* ── GRANT MANAGEMENT ────────────────────────────────── */
+.grant-section {
+  background: var(--ink-mid);
+  position: relative;
+  overflow: hidden;
+}
+.grant-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(107,174,214,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 70%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.grant-section .section-head h2 { color: var(--white); }
+.grant-section .section-head p  { color: rgba(255,255,255,0.48); }
+.grant-section .label { color: var(--slate-bright); }
+.grant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.grant-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+.grant-card:hover {
+  border-color: rgba(107,174,214,0.3);
+  background: rgba(107,174,214,0.05);
+}
+.grant-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.grant-card-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.grant-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+.grant-card-sub {
+  font-size: 0.7rem;
+  color: var(--slate-bright);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+.grant-card-body { padding: 1.25rem 1.5rem; }
+.grant-card-body p {
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.52);
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+.grant-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.grant-feat {
+  font-size: 0.68rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  background: rgba(107,174,214,0.1);
+  color: var(--slate-bright);
+  border: 1px solid rgba(107,174,214,0.2);
+}
+.grant-alert-box {
+  grid-column: 1 / -1;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.grant-alert-icon { font-size: 1.4rem; flex-shrink: 0; }
+.grant-alert-text strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gold-lt);
+  margin-bottom: 0.35rem;
+}
+.grant-alert-text p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+/* ── ASSET MANAGEMENT ────────────────────────────────── */
+.fta-section {
+  background: var(--ink-mid);
+  position: relative;
+  overflow: hidden;
+}
+.fta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(107,174,214,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 70%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.fta-section .section-head h2 { color: var(--white); }
+.fta-section .section-head p  { color: rgba(255,255,255,0.48); }
+.fta-section .label { color: var(--slate-bright); }
+.fta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+.fta-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 1.5rem 1.5rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.fta-card:hover {
+  border-color: rgba(107,174,214,0.3);
+  background: rgba(107,174,214,0.05);
+}
+.fta-badge {
+  display: inline-block;
+  background: var(--slate-dark);
+  border: 1px solid rgba(107,174,214,0.3);
+  color: var(--slate-bright);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  margin-bottom: 0.75rem;
+}
+.fta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.fta-body {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.48);
+  line-height: 1.65;
+  margin-bottom: 0.85rem;
+}
+.fta-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.fta-item {
+  font-size: 0.68rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ── PERSONAS ────────────────────────────────────────── */
+.personas-section {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.personas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+.personas-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+  margin-top: 1.1rem;
+}
+.persona-card {
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.4rem 1.25rem;
+  border-top: 3px solid var(--slate);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.persona-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.persona-icon { font-size: 1.4rem; margin-bottom: 0.65rem; }
+.persona-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+.persona-inst {
+  font-size: 0.67rem;
+  color: var(--slate);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+  font-weight: 500;
+}
+.persona-gain {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.persona-gain strong { color: var(--body-fg); font-weight: 500; }
+
+/* ── HOW IT WORKS ────────────────────────────────────── */
+.how-section { background: var(--cream); }
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.how-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1.25rem;
+}
+.how-left p { font-size: 0.97rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+.how-steps { display: flex; flex-direction: column; gap: 0; }
+.how-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.how-step:last-child { border-bottom: none; }
+.step-num {
+  width: 32px; height: 32px;
+  background: var(--slate);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-content strong { display: block; font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.3rem; }
+.step-content span { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.outcome-block {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 1.75rem;
+  border: 1px solid var(--rule);
+  margin-bottom: 1.1rem;
+  box-shadow: var(--shadow);
+}
+.outcome-block:last-child { margin-bottom: 0; }
+.ob-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.ob-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.ob-body { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+
+/* ── SERVICE TYPES ───────────────────────────────────── */
+.service-section {
+  background: var(--slate-pale);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+.service-card {
+  background: var(--white);
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  padding: 1.4rem 1.1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.service-icon { font-size: 1.8rem; margin-bottom: 0.65rem; }
+.service-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+.service-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+
+/* ── CTA ─────────────────────────────────────────────── */
+.cta-section {
+  background: var(--warm-mid);
+  border-top: 1px solid var(--rule);
+}
+.cta-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.cta-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1rem;
+}
+.cta-left p { color: var(--muted); font-size: 0.97rem; line-height: 1.75; max-width: 420px; }
+.cta-right {
+  background: var(--white);
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  padding: 2.25rem 2.5rem;
+}
+.cta-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+.cta-title { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+.contact-detail { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+.contact-detail .icon {
+  width: 34px; height: 34px;
+  background: var(--slate-pale);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0;
+}
+.contact-detail .val { font-size: 0.9rem; color: var(--ink); }
+.contact-detail a { color: var(--ink); border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+.contact-detail a:hover { border-color: var(--slate); }
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--slate);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 1.75rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-contact:hover { background: var(--slate-lt); transform: translateY(-1px); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  border-top: 3px solid var(--slate);
+  padding: 2.75rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.footer-brand span { color: var(--slate-bright); }
+.footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .personas-grid { grid-template-columns: repeat(2, 1fr); }
+  .personas-grid-bottom { grid-template-columns: repeat(2, 1fr); }
+  .service-grid { grid-template-columns: repeat(3, 1fr); }
+  .proof-strip-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .hero-inner, .how-grid, .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ops-grid, .intel-grid, .fta-grid { grid-template-columns: 1fr; }
+  .quote-strip-inner { flex-direction: column; gap: 1rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 0 4rem; }
+}
+@media (max-width: 560px) {
+  .personas-grid, .personas-grid-bottom { grid-template-columns: 1fr; }
+  .service-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <div class="nav-product-large">Transit <span>Assistant</span></div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#intelligence">Intelligence</a></li>
+        <li><a href="#assets">Assets</a></li>
+        <li><a href="#grants">Grants</a></li>
+        <li><a href="#fta">FTA Programs</a></li>
+        <li><a href="#conversation" class="nav-cta">Start a Conversation</a></li>
+      </ul>
+      <a href="/" class="nav-brand">
+        <img src="../loyto_icon_gold.png" alt="Loyto.ai" class="nav-logo">
+        <span class="nav-wordmark">Loyto<span>.ai</span></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-bar"></div>
+          <div class="hero-scale-line"><strong>40+ programs</strong> &nbsp;·&nbsp; <strong>1.6M rides</strong> annually</div>
+        </div>
+        <h1 class="hero-title">
+          From Scheduling<br>
+          to <em>Strategy.</em><br>
+          Transit Intelligence<br>
+          in One Platform.
+        </h1>
+        <p class="hero-sub">Turn your transit operations data into decisions — ask questions in plain English, get answers instantly.</p>
+        <p class="hero-body">
+          Transit Assistant manages every aspect of transit operations — scheduling, dispatch, ridership, compliance, and reporting — and elevates leadership with a natural language intelligence layer that makes your data instantly accessible to everyone on your team.
+        </p>
+        <div class="hero-actions">
+          <a href="#conversation" class="btn-primary">Start a Conversation →</a>
+          <a href="#intelligence" class="btn-ghost">See the Intelligence</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-panel">
+          <div class="panel-label">Natural language query — live example</div>
+          <div class="nlq-query">Which counties have the fastest ridership growth this quarter?</div>
+          <div class="ops-stats">
+            <div class="op-stat">
+              <div class="op-num">1.6M+</div>
+              <div class="op-label">Annual rides managed</div>
+            </div>
+            <div class="op-stat">
+              <div class="op-num">40+</div>
+              <div class="op-label">Active programs</div>
+            </div>
+            <div class="op-stat">
+              <div class="op-num">Real-time</div>
+              <div class="op-label">Dispatch & tracking</div>
+            </div>
+          </div>
+          <div class="ops-rows">
+            <div class="op-row active">
+              <div class="op-row-text">
+                <strong>County growth ranking — instant answer</strong>
+                <span>No report menus. No database queries. Plain English in, intelligence out.</span>
+              </div>
+            </div>
+            <div class="op-row mid">
+              <div class="op-row-text">
+                <strong>Fleet utilization — current snapshot</strong>
+                <span>Ask anything about your operations. Get answers your whole team can use.</span>
+              </div>
+            </div>
+            <div class="op-row low">
+              <div class="op-row-text">
+                <strong>Section 5311 compliance — always current</strong>
+                <span>Grant reporting and FTA compliance data available on demand.</span>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            No technical training required. Any staff member can access the intelligence your operations generate.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROOF STRIP ────────────────────────────────────── -->
+<div class="proof-strip">
+  <div class="container">
+    <div class="proof-strip-inner">
+      <div class="proof-stat">
+        <div class="proof-num">40<span>+</span></div>
+        <div class="proof-desc">Active transit programs running on Transit Assistant</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">1.6<span>M+</span></div>
+        <div class="proof-desc">Passenger rides delivered annually</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">4<span>+</span></div>
+        <div class="proof-desc">FTA program types fully supported</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">1<span>×</span></div>
+        <div class="proof-desc">Unified platform — scheduling through strategy</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── QUOTE STRIP ────────────────────────────────────── -->
+<div class="quote-strip">
+  <div class="container">
+    <div class="quote-strip-inner">
+      <blockquote>
+        Transit agencies generate more operational data than they can ever analyze manually.<br>
+        Transit Assistant makes that data <strong>instantly accessible — in plain English — to every decision-maker on your team.</strong>
+      </blockquote>
+      <div class="quote-meta">Transit Assistant &nbsp;·&nbsp; Loyto.ai</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CORE OPS ────────────────────────────────────────── -->
+<section class="ops-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Core Operations</div>
+      <h2>Everything your agency needs<br>to run — in one place.</h2>
+      <p>Transit Assistant handles the full operational lifecycle — from scheduling the first trip of the day to submitting compliance reports at month end.</p>
+    </div>
+    <div class="ops-grid">
+
+      <div class="ops-card">
+        <div class="ops-icon">📋</div>
+        <h3>Scheduling &amp; Dispatch</h3>
+        <p>Drag-and-drop trip assignment, real-time schedule adjustments, recurring trip management, and full dispatcher visibility across all drivers and routes.</p>
+        <div class="ops-features">
+          <span class="ops-tag">Drag-and-drop UI</span>
+          <span class="ops-tag">Real-time adjustments</span>
+          <span class="ops-tag">Multi-agency support</span>
+          <span class="ops-tag">Route planning</span>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-icon">📱</div>
+        <h3>Driver Mobile Operations</h3>
+        <p>Instant trip notifications, mobile manifests, odometer capture at every stop, and real-time completion updates — keeping dispatchers and drivers connected at all times.</p>
+        <div class="ops-features">
+          <span class="ops-tag">Instant notifications</span>
+          <span class="ops-tag">Text-to-speech</span>
+          <span class="ops-tag">Live odometer capture</span>
+          <span class="ops-tag">Stop-level updates</span>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-icon">✅</div>
+        <h3>Ridership Data &amp; Compliance</h3>
+        <p>Automated ridership record creation, validation checks for inconsistent data, approval workflows, and direct submission to reporting systems — reducing manual effort and errors.</p>
+        <div class="ops-features">
+          <span class="ops-tag">Auto-validation</span>
+          <span class="ops-tag">Approval workflows</span>
+          <span class="ops-tag">NTD-ready exports</span>
+          <span class="ops-tag">Historical records</span>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-icon">🚌</div>
+        <h3>Passenger Booking</h3>
+        <p>Mobile ride booking for passengers — on-demand trip requests automatically routed to the correct provider, supporting public transit, paratransit, and NEMT riders.</p>
+        <div class="ops-features">
+          <span class="ops-tag">On-demand booking</span>
+          <span class="ops-tag">Auto-routing</span>
+          <span class="ops-tag">NEMT integration</span>
+          <span class="ops-tag">Accessibility support</span>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-icon">🏥</div>
+        <h3>NEMT &amp; Medical Transport</h3>
+        <p>Direct integration with Non-Emergency Medical Transport referrer systems — seamless ride coordination between agencies and hospitals, clinics, and Medicaid transportation providers.</p>
+        <div class="ops-features">
+          <span class="ops-tag">Referrer integration</span>
+          <span class="ops-tag">Medicaid support</span>
+          <span class="ops-tag">Patient scheduling</span>
+          <span class="ops-tag">Data exchange</span>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-icon">🚐</div>
+        <h3>Vehicle Asset Management</h3>
+        <p>Complete vehicle lifecycle management — from purchase and registration through maintenance scheduling, in-service tracking, and final disposal — with full documentation at every stage.</p>
+        <div class="ops-features">
+          <span class="ops-tag">Lifecycle tracking</span>
+          <span class="ops-tag">Maintenance scheduling</span>
+          <span class="ops-tag">Odometer history</span>
+          <span class="ops-tag">Disposal records</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── INTELLIGENCE ───────────────────────────────────── -->
+<section class="intel-section" id="intelligence">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">The Intelligence Layer</div>
+      <h2>From operations platform<br>to decision-support system.</h2>
+      <p>Transit Assistant goes beyond managing operations — it transforms your operational data into intelligence your entire leadership team can access, in plain English, without technical training.</p>
+    </div>
+    <div class="intel-grid">
+
+      <div class="intel-card">
+        <div class="intel-card-header">
+          <div class="ic-accent ic-accent-1"></div>
+          <div class="ic-type ic-type-1">Natural Language Queries</div>
+          <div class="ic-name">Ask Your Data Anything</div>
+          <div class="ic-tagline">Plain English questions. Instant answers. No report menus, no database training required.</div>
+        </div>
+        <div class="intel-card-body">
+          <p>Transit Assistant's NLQ layer allows anyone on your team — from the executive director to a dispatcher — to access operational intelligence by simply asking a question in everyday language.</p>
+          <div class="nlq-examples">
+            <div class="nlq-examples-label">Example queries</div>
+            <div class="nlq-example-row">How many rides did we provide last month?</div>
+            <div class="nlq-example-row">Which drivers completed the most trips this week?</div>
+            <div class="nlq-example-row">Show no-show rates by route for Q2.</div>
+            <div class="nlq-example-row">What is our current fleet utilization?</div>
+          </div>
+          <div class="sig-pills">
+            <span class="sig-pill active">Plain English queries</span>
+            <span class="sig-pill active">Self-service analytics</span>
+            <span class="sig-pill">No technical training</span>
+            <span class="sig-pill">Any staff member</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-card-header">
+          <div class="ic-accent ic-accent-2"></div>
+          <div class="ic-type ic-type-2">Analytical Signals</div>
+          <div class="ic-name">Pattern Intelligence</div>
+          <div class="ic-tagline">What your operations data is revealing — across every route, vehicle, and program simultaneously.</div>
+        </div>
+        <div class="intel-card-body">
+          <p>Transit Assistant continuously analyzes ridership patterns, route performance, driver productivity, and fleet utilization across your entire operation — surfacing trends and anomalies that manual reporting would miss entirely.</p>
+          <div class="sig-pills">
+            <span class="sig-pill active">Ridership trends</span>
+            <span class="sig-pill active">Route performance</span>
+            <span class="sig-pill">No-show patterns</span>
+            <span class="sig-pill">Driver productivity</span>
+            <span class="sig-pill">Fleet utilization</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-card-header">
+          <div class="ic-accent ic-accent-3"></div>
+          <div class="ic-type ic-type-3">Forecasting Signals</div>
+          <div class="ic-name">Forward Intelligence</div>
+          <div class="ic-tagline">What demand, capacity, and compliance requirements are likely to look like — before they arrive.</div>
+        </div>
+        <div class="intel-card-body">
+          <p>Transit Assistant identifies early indicators of demand shifts, route stress, and capacity needs — giving agency leadership and dispatchers advance notice to act, not react. Compliance reporting timelines are tracked automatically so grant deadlines are never a surprise.</p>
+          <div class="sig-pills">
+            <span class="sig-pill active">Demand forecasting</span>
+            <span class="sig-pill active">Capacity signals</span>
+            <span class="sig-pill">Grant deadline tracking</span>
+            <span class="sig-pill">Growth county signals</span>
+            <span class="sig-pill">Route stress alerts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="intel-card">
+        <div class="intel-card-header">
+          <div class="ic-accent ic-accent-4"></div>
+          <div class="ic-type ic-type-4">Machine Learning Signals</div>
+          <div class="ic-name">Adaptive Intelligence</div>
+          <div class="ic-tagline">Scoring and optimization that learns from your agency's own operational history.</div>
+        </div>
+        <div class="intel-card-body">
+          <p>Transit Assistant's ML layer learns from your agency's operational patterns — improving route efficiency recommendations, driver assignment optimization, and ridership predictions the longer the platform runs. Every data point makes the system more precise for your specific service area.</p>
+          <div class="sig-pills">
+            <span class="sig-pill active">Route optimization</span>
+            <span class="sig-pill active">Ridership prediction</span>
+            <span class="sig-pill">Assignment scoring</span>
+            <span class="sig-pill">Efficiency modeling</span>
+            <span class="sig-pill">Service area learning</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE TYPES ──────────────────────────────────── -->
+<section class="service-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Service Types</div>
+      <h2>Built for every type of transit service.</h2>
+      <p>Transit Assistant's flexible architecture supports agencies of all sizes and service types — from small rural programs to complex multi-provider statewide networks.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-icon">🌾</div>
+        <div class="service-name">Rural Transit</div>
+        <div class="service-desc">Designed for the operational realities of rural systems — flexible scheduling and compliance reporting for Section 5311 programs.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔄</div>
+        <div class="service-name">Demand Response</div>
+        <div class="service-desc">On-demand trip management with real-time scheduling, driver notification, and passenger booking support.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚌</div>
+        <div class="service-name">Fixed Route</div>
+        <div class="service-desc">Scheduled service management with productivity reporting, revenue miles tracking, and NTD submission support.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">♿</div>
+        <div class="service-name">Paratransit</div>
+        <div class="service-desc">Specialized transportation for seniors and individuals with disabilities — compliant with Section 5310 reporting requirements.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏥</div>
+        <div class="service-name">NEMT</div>
+        <div class="service-desc">Non-Emergency Medical Transport coordination — direct integration with referrer systems and Medicaid transportation providers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ASSET MANAGEMENT ───────────────────────────────── -->
+<section class="asset-section" id="assets">
+  <div class="container">
+    <div class="asset-grid">
+
+      <div class="asset-left">
+        <div class="label">Vehicle Asset Management</div>
+        <h2>Every vehicle.<br>From purchase to disposal.</h2>
+        <p>Transit Assistant manages the complete lifecycle of every vehicle in your fleet — not just where it is today, but its full history from the day it was acquired to the day it leaves service.</p>
+        <p>Every maintenance record, every odometer reading, every service event, and every status change is captured and traceable — giving your agency a single source of truth for fleet management and compliance documentation.</p>
+
+        <div class="lifecycle-track">
+          <div class="lifecycle-step">
+            <div class="ls-icon">🛒</div>
+            <div class="ls-content">
+              <strong>Purchase &amp; Registration</strong>
+              <span>Vehicle acquisition details, purchase price, registration, and funding source recorded at entry — linked to the grant that funded it.</span>
+            </div>
+          </div>
+          <div class="lifecycle-step">
+            <div class="ls-icon">✅</div>
+            <div class="ls-content">
+              <strong>In-Service Activation</strong>
+              <span>Vehicle placed into active service with initial odometer reading recorded — establishing the baseline for all future mileage and utilization tracking.</span>
+            </div>
+          </div>
+          <div class="lifecycle-step">
+            <div class="ls-icon">🔧</div>
+            <div class="ls-content">
+              <strong>Scheduled Maintenance</strong>
+              <span>Maintenance reminders triggered automatically based on mileage and service intervals — keeping your fleet compliant and reducing unexpected downtime.</span>
+            </div>
+          </div>
+          <div class="lifecycle-step">
+            <div class="ls-icon">📋</div>
+            <div class="ls-content">
+              <strong>Maintenance Records</strong>
+              <span>Every service event recorded with date, mileage, work performed, and cost — building a complete and auditable maintenance history for every vehicle.</span>
+            </div>
+          </div>
+          <div class="lifecycle-step">
+            <div class="ls-icon">⏸️</div>
+            <div class="ls-content">
+              <strong>Out-of-Service &amp; Return</strong>
+              <span>Vehicles removed from and returned to service tracked with timestamps and reason codes — maintaining accurate fleet availability at all times.</span>
+            </div>
+          </div>
+          <div class="lifecycle-step">
+            <div class="ls-icon">📤</div>
+            <div class="ls-content">
+              <strong>Disposal &amp; Retirement</strong>
+              <span>Final odometer reading, disposal method, and documentation recorded at end of life — completing the vehicle record and supporting FTA disposal reporting requirements.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="asset-right">
+        <div class="label" style="margin-bottom:1.25rem;">Module capabilities</div>
+        <div class="asset-module-cards">
+          <div class="amc">
+            <div class="amc-icon">📊</div>
+            <h4>Fleet Status Dashboard</h4>
+            <p>Real-time view of every vehicle — in-service, out-of-service, under maintenance, or awaiting disposal — across your entire fleet.</p>
+          </div>
+          <div class="amc">
+            <div class="amc-icon">🔔</div>
+            <h4>Maintenance Alerts</h4>
+            <p>Automated reminders for scheduled service based on mileage thresholds and time intervals — so nothing is missed and no vehicle is overdue.</p>
+          </div>
+          <div class="amc">
+            <div class="amc-icon">📉</div>
+            <h4>Odometer &amp; Mileage History</h4>
+            <p>Complete odometer history per vehicle — captured at every stop, every shift, and every service event — with full traceability for compliance.</p>
+          </div>
+          <div class="amc">
+            <div class="amc-icon">🛠️</div>
+            <h4>Maintenance Records</h4>
+            <p>Detailed service history for every vehicle — date, mileage, work performed, and cost — building an auditable record from purchase to disposal.</p>
+          </div>
+          <div class="amc">
+            <div class="amc-icon">📈</div>
+            <h4>Utilization Reporting</h4>
+            <p>Vehicle utilization rates, revenue miles per vehicle, and fleet efficiency metrics — giving leadership the intelligence to make smarter fleet decisions.</p>
+          </div>
+          <div class="amc">
+            <div class="amc-icon">🗂️</div>
+            <h4>Replacement Planning</h4>
+            <p>Fleet age, mileage accumulation, and maintenance cost trends surface vehicles approaching replacement — supporting proactive capital planning.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── GRANT MANAGEMENT ──────────────────────────────── -->
+<section class="grant-section" id="grants">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Grant Management</div>
+      <h2>Every grant. Every budget.<br>Every dollar — accounted for.</h2>
+      <p>Transit Assistant manages the full financial lifecycle of your agency's federal and state grants — from budget setup through expense tracking — with each grant type managed according to its own specific line item structure.</p>
+    </div>
+
+    <div class="grant-grid">
+
+      <div class="grant-card">
+        <div class="grant-card-header">
+          <div class="grant-card-icon">📁</div>
+          <div>
+            <div class="grant-card-title">Grant Setup &amp; Configuration</div>
+            <div class="grant-card-sub">Per grant type</div>
+          </div>
+        </div>
+        <div class="grant-card-body">
+          <p>Each grant is configured with its own budget structure and line items — because Section 5311, Section 5310, Section 5307, and state grants all have different reporting requirements and different allowable expense categories. Transit Assistant handles each one on its own terms.</p>
+          <div class="grant-features">
+            <span class="grant-feat">5311 configuration</span>
+            <span class="grant-feat">5310 configuration</span>
+            <span class="grant-feat">5307 configuration</span>
+            <span class="grant-feat">State grant support</span>
+            <span class="grant-feat">Custom line items</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grant-card">
+        <div class="grant-card-header">
+          <div class="grant-card-icon">💰</div>
+          <div>
+            <div class="grant-card-title">Budget Management</div>
+            <div class="grant-card-sub">Line item level</div>
+          </div>
+        </div>
+        <div class="grant-card-body">
+          <p>Budgets are tracked at the line item level — not just the grant total. Your team sees exactly how much has been allocated, how much has been spent, and how much remains on each individual budget line — across every active grant simultaneously.</p>
+          <div class="grant-features">
+            <span class="grant-feat">Line item budgets</span>
+            <span class="grant-feat">Multi-grant view</span>
+            <span class="grant-feat">Remaining balance</span>
+            <span class="grant-feat">Budget vs. actual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grant-card">
+        <div class="grant-card-header">
+          <div class="grant-card-icon">🧾</div>
+          <div>
+            <div class="grant-card-title">Expense Tracking</div>
+            <div class="grant-card-sub">Against grant line items</div>
+          </div>
+        </div>
+        <div class="grant-card-body">
+          <p>Expenses are recorded and mapped directly against the appropriate grant and line item — keeping every dollar traceable to its funding source. Auditors and program managers always see exactly where the money went and which grant it came from.</p>
+          <div class="grant-features">
+            <span class="grant-feat">Expense entry</span>
+            <span class="grant-feat">Line item mapping</span>
+            <span class="grant-feat">Funding source trace</span>
+            <span class="grant-feat">Audit-ready records</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grant-card">
+        <div class="grant-card-header">
+          <div class="grant-card-icon">📊</div>
+          <div>
+            <div class="grant-card-title">Grant Reporting</div>
+            <div class="grant-card-sub">Always current</div>
+          </div>
+        </div>
+        <div class="grant-card-body">
+          <p>Grant status reports — budget, expenses, remaining balance, and utilization rate — are generated from live data at any time. Your agency is always ready for a program review, an audit, or a grant amendment — not just at reporting deadlines.</p>
+          <div class="grant-features">
+            <span class="grant-feat">Status reports</span>
+            <span class="grant-feat">Utilization rate</span>
+            <span class="grant-feat">Amendment support</span>
+            <span class="grant-feat">Audit documentation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grant-alert-box">
+        <div class="grant-alert-icon">🔔</div>
+        <div class="grant-alert-text">
+          <strong>Budget Alert System</strong>
+          <p>Transit Assistant monitors grant budgets continuously — alerting your team when spending on any line item approaches its budget limit. Your program managers get advance notice before a line item is exhausted, not a surprise after the fact. Every grant, every line, every dollar — always under control.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FTA PROGRAMS ───────────────────────────────────── -->
+<section class="fta-section" id="fta">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Federal Program Support</div>
+      <h2>Built for the funding programs<br>your agency depends on.</h2>
+      <p>Transit Assistant supports the full range of Federal Transit Administration programs — generating compliance-grade data and reports so your team spends less time on reporting and more time on service.</p>
+    </div>
+    <div class="fta-grid">
+
+      <div class="fta-card">
+        <div class="fta-badge">Section 5311</div>
+        <div class="fta-title">Rural Area Formula Program</div>
+        <div class="fta-body">Full reporting support for rural transit programs — monthly and annual statistics across vehicles, routes, counties, and revenue miles.</div>
+        <div class="fta-items">
+          <span class="fta-item">Trip stats total</span>
+          <span class="fta-item">Monthly by vehicle</span>
+          <span class="fta-item">Monthly by route</span>
+          <span class="fta-item">Monthly by county</span>
+          <span class="fta-item">Revenue miles</span>
+        </div>
+      </div>
+
+      <div class="fta-card">
+        <div class="fta-badge">Section 5310</div>
+        <div class="fta-title">Enhanced Mobility Program</div>
+        <div class="fta-body">Quarterly reporting and ridership tracking for senior and disability transportation programs — specialized transport compliance made simple.</div>
+        <div class="fta-items">
+          <span class="fta-item">Quarterly reporting</span>
+          <span class="fta-item">Vehicle mileage</span>
+          <span class="fta-item">Senior transport</span>
+          <span class="fta-item">Disability programs</span>
+        </div>
+      </div>
+
+      <div class="fta-card">
+        <div class="fta-badge">Section 5307</div>
+        <div class="fta-title">Urbanized Area Formula Program</div>
+        <div class="fta-body">Fixed-route and demand-response reporting for urbanized area programs — passenger trips, revenue miles, hours, and productivity reporting fully supported.</div>
+        <div class="fta-items">
+          <span class="fta-item">Fixed-route ridership</span>
+          <span class="fta-item">Demand-response</span>
+          <span class="fta-item">Revenue hours</span>
+          <span class="fta-item">Productivity</span>
+          <span class="fta-item">Service trends</span>
+        </div>
+      </div>
+
+      <div class="fta-card">
+        <div class="fta-badge">NTD</div>
+        <div class="fta-title">National Transit Database</div>
+        <div class="fta-body">Source data and reports supporting NTD submissions — ridership totals, revenue miles, revenue hours, fleet data, and historical summaries generated automatically.</div>
+        <div class="fta-items">
+          <span class="fta-item">Ridership totals</span>
+          <span class="fta-item">Revenue miles</span>
+          <span class="fta-item">Fleet data</span>
+          <span class="fta-item">Service statistics</span>
+          <span class="fta-item">Historical summaries</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PERSONAS ───────────────────────────────────────── -->
+<section class="personas-section" id="personas">
+  <div class="container">
+    <div class="section-head">
+      <div class="label">Who It Serves</div>
+      <h2>Built for everyone who<br>runs and depends on transit.</h2>
+      <p>Transit Assistant delivers the right intelligence and the right tools to every role in your agency — from the executive director to the passenger booking a ride.</p>
+    </div>
+
+    <div class="personas-grid">
+      <div class="persona-card">
+        <div class="persona-icon">🏛️</div>
+        <div class="persona-role">Transit Director</div>
+        <div class="persona-inst">Executive Leadership</div>
+        <div class="persona-gain">Portfolio-level view of operations, ridership trends, and compliance status — <strong>ask any operational question in plain English and get an instant answer.</strong></div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">📡</div>
+        <div class="persona-role">Dispatcher</div>
+        <div class="persona-inst">Operations</div>
+        <div class="persona-gain">Real-time visibility across all drivers and trips — <strong>drag-and-drop scheduling, instant driver notification, and live odometer capture</strong> from one screen.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">📊</div>
+        <div class="persona-role">Grant &amp; Compliance Officer</div>
+        <div class="persona-inst">Administration</div>
+        <div class="persona-gain">FTA program data always current and accessible — <strong>compliance reports generated on demand, not assembled at deadline.</strong></div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🚗</div>
+        <div class="persona-role">Driver</div>
+        <div class="persona-inst">Field Operations</div>
+        <div class="persona-gain">Instant trip notifications on mobile, text-to-speech manifests, and <strong>automated ridership entry from real-time stop data</strong> — less paperwork, more driving.</div>
+      </div>
+    </div>
+
+    <div class="personas-grid-bottom">
+      <div class="persona-card">
+        <div class="persona-icon">🏥</div>
+        <div class="persona-role">NEMT Coordinator</div>
+        <div class="persona-inst">Medical Transport</div>
+        <div class="persona-gain">Seamless coordination between transit agencies and medical providers — <strong>patient rides scheduled, confirmed, and tracked</strong> through direct referrer system integration.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🗺️</div>
+        <div class="persona-role">State DOT Administrator</div>
+        <div class="persona-inst">Statewide Programs</div>
+        <div class="persona-gain">Multi-agency operational visibility and consolidated reporting across a statewide network — <strong>proven at scale across 40+ programs.</strong></div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">👤</div>
+        <div class="persona-role">Passenger</div>
+        <div class="persona-inst">Rider</div>
+        <div class="persona-gain">Book rides on demand from a smartphone — <strong>automatically routed to the right agency</strong> for public transit, paratransit, or medical transport.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<section class="how-section">
+  <div class="container">
+    <div class="how-grid">
+      <div class="how-left">
+        <div class="label">How It Works</div>
+        <h2>One platform.<br>Operations to strategy.</h2>
+        <p>Transit Assistant is designed for agencies at every stage of modernization — from full scheduling and dispatch operations to phased rollouts and spreadsheet-uploading transitional agencies.</p>
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Connects to your existing operations</strong>
+              <span>Spreadsheet uploads, offline data collection sheets, and phased rollouts supported — Transit Assistant meets your agency where it is, not where you wish it were.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Runs your daily operations</strong>
+              <span>Scheduling, dispatch, driver mobile operations, ridership capture, and NEMT coordination — all managed in one unified platform with real-time connectivity across every role.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Validates and submits compliance data automatically</strong>
+              <span>Built-in validation catches inconsistencies before submission. FTA program reports, NTD data, and state reporting generated from live operational data — no manual assembly required.</span>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>Transforms operations data into leadership intelligence</strong>
+              <span>Natural language queries, ML-powered forecasting, and analytical signals give your leadership team instant access to the intelligence your operations generate every day.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-right">
+        <div class="label" style="margin-bottom:1.25rem;">Agency outcomes</div>
+        <div class="outcome-block">
+          <div class="ob-label">Operational Efficiency</div>
+          <div class="ob-title">Less time managing. More time serving.</div>
+          <div class="ob-body">Automated ridership entry, real-time driver sync, and validation workflows reduce administrative overhead dramatically — giving your team time back to focus on service delivery rather than data entry.</div>
+        </div>
+        <div class="outcome-block">
+          <div class="ob-label">Compliance Confidence</div>
+          <div class="ob-title">FTA reporting ready — always.</div>
+          <div class="ob-body">Compliance data is captured at the point of operation, validated automatically, and ready for submission at any time. Grant deadlines are never a scramble because the data is always current.</div>
+        </div>
+        <div class="outcome-block">
+          <div class="ob-label">Decision Intelligence</div>
+          <div class="ob-title">Any question. Instant answer.</div>
+          <div class="ob-body">From ridership trends to fleet utilization to county growth analysis — any member of your leadership team can access the intelligence your operations generate, in plain English, without technical support.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────── -->
+<section class="cta-section" id="conversation">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <div class="label">Start a Conversation</div>
+        <h2>Tell us about your agency.</h2>
+        <p>Whether you are a rural transit program, a statewide network, a paratransit provider, or an NEMT coordinator — if your agency is managing complex operations without a unified intelligence layer, we would like to understand your situation.</p>
+      </div>
+      <div class="cta-right">
+        <div class="cta-name">Sowmya Sridhar</div>
+        <div class="cta-title">Chief Executive Officer, Loyto.ai</div>
+        <div class="contact-detail">
+          <div class="icon">✉</div>
+          <div class="val"><a href="mailto:sowmyas@loyto.ai">sowmyas@loyto.ai</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="icon">🌐</div>
+          <div class="val"><a href="https://loyto.ai">loyto.ai</a></div>
+        </div>
+        <a href="mailto:sowmyas@loyto.ai?subject=Transit Assistant — Start a Conversation" class="btn-contact">Start a Conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Transit <span>Assistant</span></div>
+        <div class="footer-tagline">From Scheduling to Strategy · Loyto.ai · 2026</div>
+      </div>
+      <div class="footer-copy">© 2026 Loyto.ai · All rights reserved</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
