@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Messaging Documentation — TransitAssistant · Loyto.ai</title>
+<meta name="description" content="SMS messaging documentation for TransitAssistant — supporting documentation, privacy policy, and terms and conditions covering operational transportation communications.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --ink:        #0e1624;
+  --ink-mid:    #152038;
+  --ink-soft:   #1c2d4a;
+  --slate:      #3a6ea8;
+  --slate-lt:   #5a8fc8;
+  --slate-pale: #e8f0f8;
+  --slate-dark: #1e3f6a;
+  --slate-bright:#6baed6;
+  --gold:       #c9a84c;
+  --gold-lt:    #e3c97a;
+  --gold-pale:  #f5ead6;
+  --cream:      #f6f8fb;
+  --warm-mid:   #edf2f7;
+  --rule:       #cdd8e8;
+  --muted:      #6b7d96;
+  --body-fg:    #2d3a4e;
+  --white:      #ffffff;
+  --radius:     6px;
+  --shadow:     0 4px 24px rgba(14,22,36,0.10);
+  --shadow-lg:  0 12px 48px rgba(14,22,36,0.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--body-fg);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(14,22,36,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(58,110,168,0.25);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.nav-left { display: flex; align-items: center; }
+.nav-product-large {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.nav-product-large span { color: var(--slate-bright); }
+.nav-right { display: flex; align-items: center; gap: 1.75rem; }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.nav-links a:hover { color: var(--slate-bright); }
+.nav-cta {
+  background: var(--slate);
+  color: var(--white) !important;
+  font-weight: 500 !important;
+  padding: 0.45rem 1.25rem;
+  border-radius: var(--radius);
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--slate-lt) !important; }
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  padding-left: 1.5rem;
+}
+.nav-logo { height: 24px; width: auto; opacity: 0.8; }
+.nav-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
+.nav-wordmark span { color: var(--gold); }
+
+/* ── DOC HERO ─────────────────────────────────────────── */
+.doc-hero {
+  background: var(--ink);
+  padding: 8rem 0 4.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.doc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 5% 50%, rgba(58,110,168,0.2) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 95% 20%, rgba(107,174,214,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.doc-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(58,110,168,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,110,168,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.doc-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+}
+.doc-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.doc-eyebrow-bar { width: 32px; height: 2px; background: var(--slate-bright); }
+.doc-eyebrow-text {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-bright);
+}
+.doc-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+.doc-title em { font-style: italic; color: var(--slate-bright); }
+.doc-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+.doc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.doc-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.doc-meta-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+.doc-meta-value {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.78);
+}
+
+/* ── TABLE OF CONTENTS STRIP ──────────────────────────── */
+.toc-strip {
+  background: var(--slate-dark);
+}
+.toc-strip-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.toc-item {
+  padding: 1.5rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  transition: background 0.2s;
+}
+.toc-item:last-child { border-right: none; }
+.toc-item:hover { background: rgba(255,255,255,0.04); }
+.toc-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--slate-bright);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.toc-text strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--white);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.toc-text span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+/* ── DOC SECTIONS ────────────────────────────────────── */
+.doc-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.doc-section:nth-child(odd) {
+  background: var(--white);
+}
+.doc-section:nth-child(even) {
+  background: var(--cream);
+}
+
+.doc-section-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.doc-section-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--slate);
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.doc-section-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.25rem;
+  font-weight: 700;
+  color: var(--slate);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+}
+.doc-section-titles {
+  padding-top: 0.5rem;
+}
+.doc-section-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.doc-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.doc-body p {
+  font-size: 1rem;
+  color: var(--body-fg);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.doc-body p:last-child {
+  margin-bottom: 0;
+}
+.doc-body strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.doc-body em {
+  font-style: italic;
+  color: var(--slate-dark);
+}
+
+/* Highlight callout box */
+.doc-callout {
+  background: var(--slate-pale);
+  border-left: 3px solid var(--slate);
+  border-radius: 0 6px 6px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+.doc-callout-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.doc-callout p {
+  font-size: 0.92rem;
+  color: var(--body-fg);
+  line-height: 1.7;
+  margin-bottom: 0.65rem;
+}
+.doc-callout p:last-child { margin-bottom: 0; }
+.doc-callout .keyword-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.doc-keyword {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.85rem;
+  background: var(--white);
+  border: 1px solid var(--slate-lt);
+  color: var(--slate-dark);
+  border-radius: 4px;
+}
+.doc-keyword.gold {
+  border-color: var(--gold);
+  color: #8a6d1f;
+  background: var(--gold-pale);
+}
+
+/* Definition / list items */
+.doc-list {
+  list-style: none;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+}
+.doc-list li {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 1.85rem;
+  font-size: 0.96rem;
+  color: var(--body-fg);
+  line-height: 1.7;
+  border-bottom: 1px solid var(--rule);
+}
+.doc-list li:last-child { border-bottom: none; }
+.doc-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.3rem;
+  top: 1.15rem;
+  width: 6px;
+  height: 6px;
+  background: var(--slate);
+  border-radius: 50%;
+}
+
+/* ── COMPANY / PRINT NOTICE ──────────────────────────── */
+.print-notice {
+  background: var(--ink-mid);
+  color: rgba(255,255,255,0.65);
+  padding: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.print-notice::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 90% 30%, rgba(107,174,214,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.print-notice-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.print-notice-left h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+  margin: 0.5rem 0 0.75rem;
+}
+.print-notice-left p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+}
+.print-notice-right {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+}
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+}
+.contact-line:last-child { border-bottom: none; }
+.contact-line .ic {
+  width: 30px; height: 30px;
+  background: rgba(107,174,214,0.12);
+  border: 1px solid rgba(107,174,214,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  color: var(--slate-bright);
+  flex-shrink: 0;
+}
+.contact-line a:hover { color: var(--slate-bright); }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  border-top: 3px solid var(--slate);
+  padding: 2.75rem 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.footer-brand span { color: var(--slate-bright); }
+.footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 0.3rem; }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .doc-hero { padding: 6.5rem 0 3.5rem; }
+  .toc-strip-inner { grid-template-columns: 1fr; }
+  .toc-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .toc-item:last-child { border-bottom: none; }
+  .print-notice-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .doc-section-header { flex-direction: column; gap: 0.75rem; }
+  .doc-section-num { font-size: 2.5rem; }
+}
+@media (max-width: 560px) {
+  .doc-meta { gap: 1rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-left">
+      <div class="nav-product-large">Transit <span>Assistant</span></div>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#supporting-docs">Supporting Docs</a></li>
+        <li><a href="#privacy-policy">Privacy Policy</a></li>
+        <li><a href="#terms-conditions">Terms &amp; Conditions</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <a href="/" class="nav-brand">
+        <span class="nav-wordmark">Loyto<span>.ai</span></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── DOC HERO ──────────────────────────────────────── -->
+<section class="doc-hero">
+  <div class="container">
+    <div class="doc-hero-inner">
+      <div class="doc-eyebrow">
+        <div class="doc-eyebrow-bar"></div>
+        <div class="doc-eyebrow-text">SMS Messaging Documentation</div>
+      </div>
+      <h1 class="doc-title">
+        TransitAssistant <em>SMS</em><br>
+        Messaging Documentation
+      </h1>
+      <p class="doc-sub">
+        Supporting documentation, privacy policy, and terms and conditions covering SMS
+        communications used by participating transit agencies through the TransitAssistant
+        platform, operated by SRR LLC.
+      </p>
+      <div class="doc-meta">
+        <div class="doc-meta-item">
+          <div class="doc-meta-label">Platform</div>
+          <div class="doc-meta-value">TransitAssistant</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="doc-meta-label">Operator</div>
+          <div class="doc-meta-value">SRR LLC</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="doc-meta-label">Document Type</div>
+          <div class="doc-meta-value">SMS Compliance Documentation</div>
+        </div>
+        <div class="doc-meta-item">
+          <div class="doc-meta-label">Applies To</div>
+          <div class="doc-meta-value">Participating Transit Agencies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TABLE OF CONTENTS STRIP ───────────────────────── -->
+<div class="toc-strip">
+  <div class="container">
+    <div class="toc-strip-inner">
+      <a href="#supporting-docs" class="toc-item">
+        <div class="toc-num">01</div>
+        <div class="toc-text">
+          <strong>Supporting Documentation</strong>
+          <span>"Other" opt-in method, consent capture, and operational messaging scope.</span>
+        </div>
+      </a>
+      <a href="#privacy-policy" class="toc-item">
+        <div class="toc-num">02</div>
+        <div class="toc-text">
+          <strong>SMS Privacy Policy</strong>
+          <span>How mobile numbers are collected, used, and protected from third-party sharing.</span>
+        </div>
+      </a>
+      <a href="#terms-conditions" class="toc-item">
+        <div class="toc-num">03</div>
+        <div class="toc-text">
+          <strong>Terms &amp; Conditions</strong>
+          <span>Consent, frequency, opt-out keywords, carrier responsibilities, and rates.</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 1: SUPPORTING DOCUMENTATION ───────────── -->
+<section class="doc-section" id="supporting-docs">
+  <div class="container">
+    <div class="doc-section-inner">
+      <div class="doc-section-header">
+        <div class="doc-section-num">01</div>
+        <div class="doc-section-titles">
+          <div class="doc-section-eyebrow">Section One</div>
+          <h2 class="doc-section-title">Additional Supporting Documentation</h2>
+        </div>
+      </div>
+
+      <div class="doc-body">
+        <p>
+          The <strong>"Other" opt-in method</strong> refers to consent collected directly by
+          participating transit agency staff during passenger registration, intake, ride
+          scheduling, or updates to passenger communication preferences.
+        </p>
+        <p>
+          Agency staff inform passengers that SMS messages are used <em>only for operational
+          transportation communications</em>, including ride confirmations, pickup reminders,
+          schedule changes, cancellations, and dispatch-related updates. The passenger's
+          mobile number and SMS consent preference are recorded in TransitAssistant.
+        </p>
+        <p>
+          SMS messages are <strong>not used for third-party marketing or unrelated promotional
+          campaigns</strong>. Passengers may opt out at any time by replying STOP and may
+          request assistance by replying HELP.
+        </p>
+
+        <div class="doc-callout">
+          <div class="doc-callout-label">Opt-out &amp; assistance keywords</div>
+          <p>Passengers may control their SMS subscription at any time using these standard keywords:</p>
+          <div class="keyword-row">
+            <span class="doc-keyword">STOP</span>
+            <span class="doc-keyword">HELP</span>
+          </div>
+        </div>
+
+        <p>
+          Message frequency varies based on ride activity and service changes.
+          <em>Message and data rates may apply.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2: PRIVACY POLICY ─────────────────────── -->
+<section class="doc-section" id="privacy-policy">
+  <div class="container">
+    <div class="doc-section-inner">
+      <div class="doc-section-header">
+        <div class="doc-section-num">02</div>
+        <div class="doc-section-titles">
+          <div class="doc-section-eyebrow">Section Two</div>
+          <h2 class="doc-section-title">SMS Privacy Policy</h2>
+        </div>
+      </div>
+
+      <div class="doc-body">
+        <p>
+          <strong>SRR LLC</strong> operates TransitAssistant, a software platform used by
+          participating transit agencies to support passenger transportation services.
+        </p>
+        <p>
+          When a passenger provides a mobile phone number and consents to receive SMS
+          notifications, the phone number may be used to send operational transportation-related
+          text messages. These messages may include:
+        </p>
+
+        <ul class="doc-list">
+          <li>Ride confirmations</li>
+          <li>Pickup reminders</li>
+          <li>Schedule changes</li>
+          <li>Cancellations</li>
+          <li>Dispatch updates</li>
+          <li>Other service-related notifications</li>
+        </ul>
+
+        <p>
+          <strong>SRR LLC and participating transit agencies do not sell, rent, or share
+          mobile phone numbers with third parties for marketing purposes.</strong>
+          Mobile phone numbers are used only to support transportation service communications
+          and related system operations.
+        </p>
+        <p>
+          SMS message data may be processed by communication service providers and wireless
+          carriers as necessary to deliver text messages. <em>Message and data rates may apply.</em>
+        </p>
+        <p>
+          Passengers may opt out of SMS messages at any time by replying STOP. Passengers may
+          request assistance by replying HELP or by contacting their participating transit agency.
+        </p>
+
+        <div class="doc-callout">
+          <div class="doc-callout-label">Questions &amp; contact</div>
+          <p>
+            For questions about SMS communications or this privacy policy, passengers should
+            contact the participating transit agency providing the transportation service.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: TERMS AND CONDITIONS ───────────────── -->
+<section class="doc-section" id="terms-conditions">
+  <div class="container">
+    <div class="doc-section-inner">
+      <div class="doc-section-header">
+        <div class="doc-section-num">03</div>
+        <div class="doc-section-titles">
+          <div class="doc-section-eyebrow">Section Three</div>
+          <h2 class="doc-section-title">SMS Terms and Conditions</h2>
+        </div>
+      </div>
+
+      <div class="doc-body">
+        <p>
+          By providing a mobile phone number and consenting to receive SMS notifications,
+          the passenger agrees to receive text messages from the participating transit agency
+          through <strong>TransitAssistant</strong>, operated by <strong>SRR LLC</strong>.
+        </p>
+        <p>
+          SMS messages are used for operational transportation communications, including
+          ride confirmations, pickup reminders, schedule changes, cancellations, dispatch
+          updates, and other service-related notifications.
+        </p>
+        <p>
+          <strong>Message frequency</strong> varies based on ride activity, scheduled trips,
+          cancellations, service changes, and agency communications.
+          <em>Message and data rates may apply.</em>
+        </p>
+
+        <div class="doc-callout">
+          <div class="doc-callout-label">Opt-out &amp; help keywords</div>
+          <p>
+            Passengers may opt out at any time by replying <strong>STOP</strong>. After replying
+            STOP, the passenger may receive a confirmation message and will no longer receive
+            SMS notifications unless they opt in again.
+          </p>
+          <p>
+            Passengers may reply <strong>HELP</strong> for assistance or contact their
+            participating transit agency for support.
+          </p>
+          <div class="keyword-row">
+            <span class="doc-keyword">STOP</span>
+            <span class="doc-keyword gold">HELP</span>
+          </div>
+        </div>
+
+        <p>
+          <strong>SMS delivery is subject to wireless carrier availability.</strong>
+          Carriers are not liable for delayed or undelivered messages.
+        </p>
+        <p>
+          SRR LLC and participating transit agencies <strong>do not use SMS notifications
+          for third-party marketing or unrelated promotional campaigns</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT / PRINT NOTICE ────────────────────────── -->
+<section class="print-notice" id="contact">
+  <div class="container">
+    <div class="print-notice-inner">
+      <div class="print-notice-left">
+        <div class="label" style="color: var(--slate-bright);">Document Inquiries</div>
+        <h3>Questions about SMS communications<br>or this documentation?</h3>
+        <p>
+          Passengers should contact the participating transit agency providing their service.
+          Agencies and partners may reach Loyto.ai directly for documentation and platform inquiries.
+        </p>
+      </div>
+      <div class="print-notice-right">
+        <div class="contact-line">
+          <div class="ic">✉</div>
+          <div><a href="mailto:srramerica@gmail.com">srramerica@gmail.com</a></div>
+        </div>
+        <div class="contact-line">
+          <div class="ic">🌐</div>
+          <div><a href="https://web.transitassistant.com">web.transitassistant.com</a></div>
+        </div>
+        <div class="contact-line">
+          <div class="ic">🏢</div>
+          <div>SRR LLC — TransitAssistant Operator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Transit <span>Assistant</span></div>
+        <div class="footer-tagline">SMS Messaging Documentation · Operated by SRR LLC · Loyto.ai · 2026</div>
+      </div>
+      <div class="footer-copy">© 2026 SRR LLC · Loyto.ai · All rights reserved</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
